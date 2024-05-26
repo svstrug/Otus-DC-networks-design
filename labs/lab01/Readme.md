@@ -73,3 +73,39 @@ Client-1|eth0|10.8.0.2|255.255.255.240
 Client-2|eth0|10.8.0.18|255.255.255.240
 Client-3|eth0|10.8.0.34|255.255.255.248
 Client-4|eth0|10.8.0.42|255.255.255.248
+
+#### Конфигурация на оборудовании Huawei
+<details>
+<summary> Spine-1 </summary>
+
+#
+sysname Spine-1
+#
+interface GE1/0/1
+ undo portswitch
+ description to Leaf-1
+ undo shutdown
+ ip address 10.4.1.0 255.255.255.254
+#
+interface GE1/0/2
+ undo portswitch
+ description to Leaf-2
+ undo shutdown
+ ip address 10.4.1.2 255.255.255.254
+#
+interface GE1/0/3
+ undo portswitch
+ description to Leaf-3
+ undo shutdown
+ ip address 10.4.1.4 255.255.255.254
+#
+interface LoopBack1
+ description underlay
+ ip address 10.0.1.0 255.255.255.255
+#
+interface LoopBack2
+ description overlay
+ ip address 10.2.1.0 255.255.255.255
+#
+
+</details>
