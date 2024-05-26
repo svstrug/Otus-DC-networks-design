@@ -257,4 +257,8 @@ IP/MASK     : 10.8.0.18/28<br>
 Cl-3> show ip<br>
 NAME        : Cl-3[1]<br>
 IP/MASK     : 10.8.0.34/29<br>
+
+Cl-4> show ip<br>
+NAME        : Cl-4[1]<br>
+IP/MASK     : 10.8.0.42/29<br>
 </details>
