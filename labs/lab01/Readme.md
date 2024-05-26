@@ -78,34 +78,34 @@ Client-4|eth0|10.8.0.42|255.255.255.248
 <details>
 <summary> Spine-1 </summary>
 
-#
-sysname Spine-1
-#
-interface GE1/0/1
- undo portswitch
- description to Leaf-1
- undo shutdown
- ip address 10.4.1.0 255.255.255.254
-#
-interface GE1/0/2
- undo portswitch
- description to Leaf-2
- undo shutdown
- ip address 10.4.1.2 255.255.255.254
-#
-interface GE1/0/3
- undo portswitch
- description to Leaf-3
- undo shutdown
- ip address 10.4.1.4 255.255.255.254
-#
-interface LoopBack1
- description underlay
- ip address 10.0.1.0 255.255.255.255
-#
-interface LoopBack2
- description overlay
- ip address 10.2.1.0 255.255.255.255
-#
+#<br> 
+sysname Spine-1<br> 
+#<br> 
+interface GE1/0/1<br> 
+ undo portswitch<br> 
+ description to Leaf-1<br> 
+ undo shutdown<br> 
+ ip address 10.4.1.0 255.255.255.254<br> 
+#<br> 
+interface GE1/0/2<br> 
+ undo portswitch<br> 
+ description to Leaf-2<br> 
+ undo shutdown<br> 
+ ip address 10.4.1.2 255.255.255.254<br> 
+#<br> 
+interface GE1/0/3<br> 
+ undo portswitch<br> 
+ description to Leaf-3<br> 
+ undo shutdown<br> 
+ ip address 10.4.1.4 255.255.255.254<br> 
+#<br> 
+interface LoopBack1<br> 
+ description underlay<br> 
+ ip address 10.0.1.0 255.255.255.255<br> 
+#<br> 
+interface LoopBack2<br> 
+ description overlay<br> 
+ ip address 10.2.1.0 255.255.255.255<br> 
+#<br> 
 
 </details>
