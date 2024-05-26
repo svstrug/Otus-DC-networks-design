@@ -109,3 +109,35 @@ interface LoopBack2<br>
 #<br> 
 
 </details>
+<details>
+<summary> Spine-2 </summary>
+ #<br> 
+sysname Spine-2<br> 
+#<br> 
+interface GE1/0/1<br> 
+ undo portswitch<br> 
+ description to Leaf-1<br> 
+ undo shutdown<br> 
+ ip address 10.4.2.0 255.255.255.254<br> 
+#<br> 
+interface GE1/0/2<br> 
+ undo portswitch<br> 
+ description to Leaf-2<br> 
+ undo shutdown<br> 
+ ip address 10.4.2.2 255.255.255.254<br> 
+#<br> 
+interface GE1/0/3<br> 
+ undo portswitch<br> 
+ description to Leaf-3<br> 
+ undo shutdown<br> 
+ ip address 10.4.2.4 255.255.255.254<br> 
+#<br> 
+interface LoopBack1<br> 
+ description underlay<br> 
+ ip address 10.0.2.0 255.255.255.255<br> 
+#<br> 
+interface LoopBack2<br> 
+ description overlay<br> 
+ ip address 10.2.2.0 255.255.255.255<br> 
+#<br> 
+</details>
