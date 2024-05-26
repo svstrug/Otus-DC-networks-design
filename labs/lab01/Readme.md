@@ -245,4 +245,16 @@ interface LoopBack2<br>
 </details>
 <details>
 <summary> Clients 1-4 </summary>
+ 
+ Cl-1> show ip<br>
+NAME        : Cl-1[1]<br>
+IP/MASK     : 10.8.0.2/28<br>
+
+Cl-2> show ip<br>
+NAME        : Cl-2[1]<br>
+IP/MASK     : 10.8.0.18/28<br>
+
+Cl-3> show ip<br>
+NAME        : Cl-3[1]<br>
+IP/MASK     : 10.8.0.34/29<br>
 </details>
