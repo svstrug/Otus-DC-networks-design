@@ -15,6 +15,7 @@
 <details>
 <summary> IP's </summary>
 Device|Interface|IP Address|Subnet Mask
+---|---|---|---
 Spine-1|Lo1|10.0.1.0|255.255.255.255
 -|Lo2|10.2.1.0|255.255.255.255
 -|GE1/0/1|10.4.1.0|255.255.255.254
