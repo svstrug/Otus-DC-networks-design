@@ -104,6 +104,7 @@ ospf 777 router-id 10.0.2.0<br>
   network 10.4.2.4 0.0.0.1 description PtP to Leaf-3<br>
 #<br>
 </details>
+<details>
 <summary> Leaf-1 </summary>
 #<br>
 sysname Leaf-1<br>
