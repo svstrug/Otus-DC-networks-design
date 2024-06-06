@@ -104,3 +104,49 @@ ospf 777 router-id 10.0.2.0<br>
   network 10.4.2.4 0.0.0.1 description PtP to Leaf-3<br>
 #<br>
 </details>
+<summary> Leaf-1 </summary>
+#<br>
+sysname Leaf-1<br>
+#<br>
+interface GE1/0/1<br>
+ undo portswitch<br>
+ description to Spine-1<br>
+ undo shutdown<br>
+ ip address 10.4.1.1 255.255.255.254<br>
+ ospf network-type p2p<br>
+ ospf timer hello 3<br>
+#<br>
+interface GE1/0/2<br>
+ undo portswitch<br>
+ description to Spine-2<br>
+ undo shutdown<br>
+ ip address 10.4.2.1 255.255.255.254<br>
+ ospf network-type p2p<br>
+ ospf timer hello 3<br>
+#<br>
+interface GE1/0/9<br>
+ undo portswitch<br>
+ description to Client-1<br>
+ undo shutdown<br>
+ ip address 10.8.0.1 255.255.255.240<br>
+#<br>
+interface LoopBack1<br>
+ description underlay<br>
+ ip address 10.0.0.1 255.255.255.255<br>
+#<br>
+interface LoopBack2<br>
+ description overlay<br>
+ ip address 10.2.0.1 255.255.255.255<br>
+#<br>
+ospf 333 router-id 10.0.0.1<br>
+ silent-interface all<br>
+ undo silent-interface GE1/0/1<br>
+ undo silent-interface GE1/0/2<br>
+ area 0.0.0.0<br>
+  network 10.0.0.1 0.0.0.0 description underlay LoopBack1<br>
+  network 10.2.0.1 0.0.0.0 description overlay LoopBack2<br>
+  network 10.4.1.0 0.0.0.1 description PtP to Spine-1<br>
+  network 10.4.2.0 0.0.0.1 description PtP to Spine-2<br>
+  network 10.8.0.0 0.0.0.15 description Client-1 network<br>
+#<br>
+</details>
