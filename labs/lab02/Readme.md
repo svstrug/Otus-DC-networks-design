@@ -12,8 +12,6 @@
 Применена команда ospf network-type p2p для оптимизации работы протокола.
 
 ### IP план:
-<details>
-<summary> IP's </summary>
 Device|Interface|IP Address|Subnet Mask
 ---|---|---|---
 Spine-1|Lo1|10.0.1.0|255.255.255.255
@@ -46,7 +44,7 @@ Client-1|eth0|10.8.0.2|255.255.255.240
 Client-2|eth0|10.8.0.18|255.255.255.240
 Client-3|eth0|10.8.0.34|255.255.255.248
 Client-4|eth0|10.8.0.42|255.255.255.248
-</details>
+
 #### Конфигурация на оборудовании Huawei
 <details>
 <summary> Spine-1 </summary>
