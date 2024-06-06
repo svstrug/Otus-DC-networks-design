@@ -252,9 +252,12 @@ ospf 999 router-id 10.0.0.3<br>
   network 10.8.0.40 0.0.0.7 description Client-4 network<br>
 #<br>
 </details>
+
 #### Диагностика
+
 <details>
 <summary> Spine-1 diag </summary>
+ 
  ```
 <Spine-1>display ip routing-table
 Proto: Protocol        Pre: Preference
