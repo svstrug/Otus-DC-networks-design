@@ -662,8 +662,11 @@ OSPF Process 999 with Router ID 10.0.0.3
   Authentication Sequence     : 0 
 ```
 </details>
+
 #### Проверка наличия IP связности между всеми устройствами в OSPF домене
+
 <details>
+ 
 ```
 Cli-1> show ip
 
