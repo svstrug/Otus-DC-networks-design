@@ -8,7 +8,7 @@
 
 ### Особенности настройки:
 Изменены стандартные таймеры OSPF на интерфейсах  Timers: Hello 3, Dead 12 с целью улучшения сходимости протокола.<br>
-На Leaf'ах включен silent-interface all (passive interface default), который отключен только на интерфейсах в сторону Spine'ов, чтобы не отправлять hello в клиентские подсети.<br>
+На Leaf'ах включен silent-interface all (passive interface default), который отключен только на интерфейсах в сторону Spine'ов, чтобы не отправлять hello в клиентские порты.<br>
 Применена команда ospf network-type p2p для оптимизации работы протокола.
 
 #### Конфигурация на оборудовании Huawei
@@ -56,5 +56,51 @@ ospf 555 router-id 10.0.1.0<br>
   network 10.4.1.0 0.0.0.1 description PtP to Leaf-1<br>
   network 10.4.1.2 0.0.0.1 description PtP to Leaf-2<br>
   network 10.4.1.4 0.0.0.1 description PtP to Leaf-3<br>
+#<br>
+</details>
+<details>
+<summary> Spine-2 </summary>
+#<br>
+sysname Spine-2<br>
+#<br>
+interface GE1/0/1<br>
+ undo portswitch<br>
+ description to Leaf-1<br>
+ undo shutdown<br>
+ ip address 10.4.2.0 255.255.255.254<br>
+ ospf network-type p2p<br>
+ ospf timer hello 3<br>
+#<br>
+interface GE1/0/2<br>
+ undo portswitch<br>
+ description to Leaf-2<br>
+ undo shutdown<br>
+ ip address 10.4.2.2 255.255.255.254<br>
+ ospf network-type p2p<br>
+ ospf timer hello 3<br>
+#<br>
+interface GE1/0/3<br>
+ undo portswitch<br>
+ description to Leaf-3<br>
+ undo shutdown<br>
+ ip address 10.4.2.4 255.255.255.254<br>
+ ospf network-type p2p<br>
+ ospf timer hello 3<br>
+#<br>
+interface LoopBack1<br>
+ description underlay<br>
+ ip address 10.0.2.0 255.255.255.255<br>
+#<br>
+interface LoopBack2<br>
+ description overlay<br>
+ ip address 10.2.2.0 255.255.255.255<br>
+#<br>
+ospf 777 router-id 10.0.2.0<br>
+ area 0.0.0.0<br>
+  network 10.0.2.0 0.0.0.0 description underlay Loopback1<br>
+  network 10.2.2.0 0.0.0.0 description overlay Loopback2<br>
+  network 10.4.2.0 0.0.0.1 description PtP to Leaf-1<br>
+  network 10.4.2.2 0.0.0.1 description PtP to Leaf-2<br>
+  network 10.4.2.4 0.0.0.1 description PtP to Leaf-3<br>
 #<br>
 </details>
