@@ -333,3 +333,81 @@ OSPF Process 555 with Router ID 10.0.1.0
   Authentication Sequence     : 0
 ```
 </details>
+<details>
+<summary> Spine-2 diag </summary>
+ 
+ ```
+<Spine-2>display ip routing-table
+Proto: Protocol        Pre: Preference
+Route Flags: R - relay, D - download to fib, T - to vpn-instance, B - black hole route
+------------------------------------------------------------------------------
+Routing Table : _public_
+         Destinations : 27       Routes : 31        
+
+Destination/Mask    Proto   Pre  Cost        Flags NextHop         Interface
+
+       10.0.0.1/32  OSPF    10   1             D   10.4.2.1        GE1/0/1
+       10.0.0.2/32  OSPF    10   1             D   10.4.2.3        GE1/0/2
+       10.0.0.3/32  OSPF    10   1             D   10.4.2.5        GE1/0/3
+       10.0.1.0/32  OSPF    10   2             D   10.4.2.5        GE1/0/3
+                    OSPF    10   2             D   10.4.2.3        GE1/0/2
+                    OSPF    10   2             D   10.4.2.1        GE1/0/1
+       10.0.2.0/32  Direct  0    0             D   127.0.0.1       LoopBack1
+       10.2.0.1/32  OSPF    10   1             D   10.4.2.1        GE1/0/1
+       10.2.0.2/32  OSPF    10   1             D   10.4.2.3        GE1/0/2
+       10.2.0.3/32  OSPF    10   1             D   10.4.2.5        GE1/0/3
+       10.2.1.0/32  OSPF    10   2             D   10.4.2.5        GE1/0/3
+                    OSPF    10   2             D   10.4.2.3        GE1/0/2
+                    OSPF    10   2             D   10.4.2.1        GE1/0/1
+       10.2.2.0/32  Direct  0    0             D   127.0.0.1       LoopBack2
+       10.4.1.0/31  OSPF    10   2             D   10.4.2.1        GE1/0/1
+       10.4.1.2/31  OSPF    10   2             D   10.4.2.3        GE1/0/2
+       10.4.1.4/31  OSPF    10   2             D   10.4.2.5        GE1/0/3
+       10.4.2.0/31  Direct  0    0             D   10.4.2.0        GE1/0/1
+       10.4.2.0/32  Direct  0    0             D   127.0.0.1       GE1/0/1
+       10.4.2.2/31  Direct  0    0             D   10.4.2.2        GE1/0/2
+       10.4.2.2/32  Direct  0    0             D   127.0.0.1       GE1/0/2
+       10.4.2.4/31  Direct  0    0             D   10.4.2.4        GE1/0/3
+       10.4.2.4/32  Direct  0    0             D   127.0.0.1       GE1/0/3
+       10.8.0.0/28  OSPF    10   2             D   10.4.2.1        GE1/0/1
+      10.8.0.16/28  OSPF    10   2             D   10.4.2.3        GE1/0/2
+      10.8.0.32/29  OSPF    10   2             D   10.4.2.5        GE1/0/3
+      10.8.0.40/29  OSPF    10   2             D   10.4.2.5        GE1/0/3
+      127.0.0.0/8   Direct  0    0             D   127.0.0.1       InLoopBack0
+      127.0.0.1/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+127.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+255.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+
+<Spine-2>display ospf peer 
+OSPF Process 777 with Router ID 10.0.2.0
+ Area 0.0.0.0 interface 10.4.2.0 (GE1/0/1)'s neighbors
+  Router ID: 10.0.0.1           Address : 10.4.2.1         
+  State    : Full               Mode    : Nbr is Slave       Priority: 1
+  DR       : None               BDR     : None               MTU     : 0
+  Dead timer due (in seconds) : 11
+  Retrans timer interval      : 5
+  Neighbor up time            : 03h26m21s
+  Neighbor up time stamp      : 2024-06-06 13:23:46
+  Authentication Sequence     : 0 
+
+ Area 0.0.0.0 interface 10.4.2.2 (GE1/0/2)'s neighbors
+  Router ID: 10.0.0.2           Address : 10.4.2.3         
+  State    : Full               Mode    : Nbr is Slave       Priority: 1
+  DR       : None               BDR     : None               MTU     : 0
+  Dead timer due (in seconds) : 12
+  Retrans timer interval      : 5
+  Neighbor up time            : 04h24m30s
+  Neighbor up time stamp      : 2024-06-06 12:25:36
+  Authentication Sequence     : 0 
+
+ Area 0.0.0.0 interface 10.4.2.4 (GE1/0/3)'s neighbors
+  Router ID: 10.0.0.3           Address : 10.4.2.5         
+  State    : Full               Mode    : Nbr is Slave       Priority: 1
+  DR       : None               BDR     : None               MTU     : 0
+  Dead timer due (in seconds) : 11
+  Retrans timer interval      : 5
+  Neighbor up time            : 03h34m20s
+  Neighbor up time stamp      : 2024-06-06 13:15:46
+  Authentication Sequence     : 0 
+```
+</details>
