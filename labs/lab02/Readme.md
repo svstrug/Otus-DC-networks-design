@@ -287,7 +287,7 @@ ospf 999 router-id 10.0.0.3<br>
 #<br>
 </details>
 
-#### Диагностика
+#### Диагностика Spine/Leaf
 
 <details>
 <summary> Spine-1 diag </summary>
@@ -660,5 +660,91 @@ OSPF Process 999 with Router ID 10.0.0.3
   Neighbor up time            : 03h46m33s
   Neighbor up time stamp      : 2024-06-06 13:15:47
   Authentication Sequence     : 0 
+```
+</details>
+#### Проверка наличия IP связности между всеми устройствами в OSPF домене
+<details>
+```
+Cli-1> show ip
+
+NAME        : Cli-1[1]
+IP/MASK     : 10.8.0.2/28
+GATEWAY     : 10.8.0.1
+DNS         : 
+MAC         : 00:50:79:66:68:06
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+Clients:
+
+Cli-1> ping 10.8.0.18
+
+84 bytes from 10.8.0.18 icmp_seq=1 ttl=61 time=6.051 ms
+84 bytes from 10.8.0.18 icmp_seq=2 ttl=61 time=3.906 ms
+84 bytes from 10.8.0.18 icmp_seq=3 ttl=61 time=3.299 ms
+84 bytes from 10.8.0.18 icmp_seq=4 ttl=61 time=4.209 ms
+84 bytes from 10.8.0.18 icmp_seq=5 ttl=61 time=3.490 ms
+
+Cli-1> ping 10.8.0.34
+
+84 bytes from 10.8.0.34 icmp_seq=1 ttl=61 time=4.491 ms
+84 bytes from 10.8.0.34 icmp_seq=2 ttl=61 time=4.602 ms
+84 bytes from 10.8.0.34 icmp_seq=3 ttl=61 time=3.586 ms
+84 bytes from 10.8.0.34 icmp_seq=4 ttl=61 time=5.285 ms
+84 bytes from 10.8.0.34 icmp_seq=5 ttl=61 time=3.990 ms
+
+Cli-1> ping 10.8.0.42
+
+84 bytes from 10.8.0.42 icmp_seq=1 ttl=61 time=5.646 ms
+84 bytes from 10.8.0.42 icmp_seq=2 ttl=61 time=4.424 ms
+84 bytes from 10.8.0.42 icmp_seq=3 ttl=61 time=3.925 ms
+84 bytes from 10.8.0.42 icmp_seq=4 ttl=61 time=3.185 ms
+84 bytes from 10.8.0.42 icmp_seq=5 ttl=61 time=3.877 ms
+
+Leaf's:
+
+Cli-1> ping 10.0.0.1
+
+84 bytes from 10.0.0.1 icmp_seq=1 ttl=255 time=5.399 ms
+84 bytes from 10.0.0.1 icmp_seq=2 ttl=255 time=5.078 ms
+84 bytes from 10.0.0.1 icmp_seq=3 ttl=255 time=1.010 ms
+84 bytes from 10.0.0.1 icmp_seq=4 ttl=255 time=1.421 ms
+84 bytes from 10.0.0.1 icmp_seq=5 ttl=255 time=0.971 ms
+
+Cli-1> ping 10.0.0.2
+
+84 bytes from 10.0.0.2 icmp_seq=1 ttl=253 time=8.659 ms
+84 bytes from 10.0.0.2 icmp_seq=2 ttl=253 time=3.688 ms
+84 bytes from 10.0.0.2 icmp_seq=3 ttl=253 time=3.649 ms
+84 bytes from 10.0.0.2 icmp_seq=4 ttl=253 time=3.899 ms
+84 bytes from 10.0.0.2 icmp_seq=5 ttl=253 time=3.996 ms
+
+Cli-1> ping 10.0.0.3
+
+84 bytes from 10.0.0.3 icmp_seq=1 ttl=253 time=13.202 ms
+84 bytes from 10.0.0.3 icmp_seq=2 ttl=253 time=4.415 ms
+84 bytes from 10.0.0.3 icmp_seq=3 ttl=253 time=2.717 ms
+84 bytes from 10.0.0.3 icmp_seq=4 ttl=253 time=3.417 ms
+84 bytes from 10.0.0.3 icmp_seq=5 ttl=253 time=5.996 ms
+
+Spines:
+
+Cli-1> ping 10.0.1.0
+
+84 bytes from 10.0.1.0 icmp_seq=1 ttl=254 time=9.672 ms
+84 bytes from 10.0.1.0 icmp_seq=2 ttl=254 time=3.800 ms
+84 bytes from 10.0.1.0 icmp_seq=3 ttl=254 time=2.137 ms
+84 bytes from 10.0.1.0 icmp_seq=4 ttl=254 time=2.238 ms
+84 bytes from 10.0.1.0 icmp_seq=5 ttl=254 time=2.441 ms
+
+Cli-1> ping 10.0.2.0
+
+84 bytes from 10.0.2.0 icmp_seq=1 ttl=254 time=8.057 ms
+84 bytes from 10.0.2.0 icmp_seq=2 ttl=254 time=2.107 ms
+84 bytes from 10.0.2.0 icmp_seq=3 ttl=254 time=10.050 ms
+84 bytes from 10.0.2.0 icmp_seq=4 ttl=254 time=2.650 ms
+84 bytes from 10.0.2.0 icmp_seq=5 ttl=254 time=8.373 ms
+
 ```
 </details>
