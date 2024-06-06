@@ -555,3 +555,76 @@ OSPF Process 200 with Router ID 10.0.0.2
   Authentication Sequence     : 0 
 ```
 </details>
+<details>
+<summary> Leaf-3 diag </summary>
+ 
+ ```
+<Leaf-3>display ip routing-table 
+Proto: Protocol        Pre: Preference
+Route Flags: R - relay, D - download to fib, T - to vpn-instance, B - black hole route
+------------------------------------------------------------------------------
+Routing Table : _public_
+         Destinations : 30       Routes : 36        
+
+Destination/Mask    Proto   Pre  Cost        Flags NextHop         Interface
+
+       10.0.0.1/32  OSPF    10   2             D   10.4.2.4        GE1/0/2
+                    OSPF    10   2             D   10.4.1.4        GE1/0/1
+       10.0.0.2/32  OSPF    10   2             D   10.4.2.4        GE1/0/2
+                    OSPF    10   2             D   10.4.1.4        GE1/0/1
+       10.0.0.3/32  Direct  0    0             D   127.0.0.1       LoopBack1
+       10.0.1.0/32  OSPF    10   1             D   10.4.1.4        GE1/0/1
+       10.0.2.0/32  OSPF    10   1             D   10.4.2.4        GE1/0/2
+       10.2.0.1/32  OSPF    10   2             D   10.4.2.4        GE1/0/2
+                    OSPF    10   2             D   10.4.1.4        GE1/0/1
+       10.2.0.2/32  OSPF    10   2             D   10.4.2.4        GE1/0/2
+                    OSPF    10   2             D   10.4.1.4        GE1/0/1
+       10.2.0.3/32  Direct  0    0             D   127.0.0.1       LoopBack2
+       10.2.1.0/32  OSPF    10   1             D   10.4.1.4        GE1/0/1
+       10.2.2.0/32  OSPF    10   1             D   10.4.2.4        GE1/0/2
+       10.4.1.0/31  OSPF    10   2             D   10.4.1.4        GE1/0/1
+       10.4.1.2/31  OSPF    10   2             D   10.4.1.4        GE1/0/1
+       10.4.1.4/31  Direct  0    0             D   10.4.1.5        GE1/0/1
+       10.4.1.5/32  Direct  0    0             D   127.0.0.1       GE1/0/1
+       10.4.2.0/31  OSPF    10   2             D   10.4.2.4        GE1/0/2
+       10.4.2.2/31  OSPF    10   2             D   10.4.2.4        GE1/0/2
+       10.4.2.4/31  Direct  0    0             D   10.4.2.5        GE1/0/2
+       10.4.2.5/32  Direct  0    0             D   127.0.0.1       GE1/0/2
+       10.8.0.0/28  OSPF    10   3             D   10.4.2.4        GE1/0/2
+                    OSPF    10   3             D   10.4.1.4        GE1/0/1
+      10.8.0.16/28  OSPF    10   3             D   10.4.2.4        GE1/0/2
+                    OSPF    10   3             D   10.4.1.4        GE1/0/1
+      10.8.0.32/29  Direct  0    0             D   10.8.0.33       GE1/0/9
+      10.8.0.33/32  Direct  0    0             D   127.0.0.1       GE1/0/9
+      10.8.0.39/32  Direct  0    0             D   127.0.0.1       GE1/0/9
+      10.8.0.40/29  Direct  0    0             D   10.8.0.41       GE1/0/8
+      10.8.0.41/32  Direct  0    0             D   127.0.0.1       GE1/0/8
+      10.8.0.47/32  Direct  0    0             D   127.0.0.1       GE1/0/8
+      127.0.0.0/8   Direct  0    0             D   127.0.0.1       InLoopBack0
+      127.0.0.1/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+127.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+255.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+
+<Leaf-3>display ospf peer
+OSPF Process 999 with Router ID 10.0.0.3
+ Area 0.0.0.0 interface 10.4.1.5 (GE1/0/1)'s neighbors
+  Router ID: 10.0.1.0           Address : 10.4.1.4         
+  State    : Full               Mode    : Nbr is Master      Priority: 1
+  DR       : None               BDR     : None               MTU     : 0
+  Dead timer due (in seconds) : 11
+  Retrans timer interval      : 5
+  Neighbor up time            : 03h46m33s
+  Neighbor up time stamp      : 2024-06-06 13:15:47
+  Authentication Sequence     : 0 
+
+ Area 0.0.0.0 interface 10.4.2.5 (GE1/0/2)'s neighbors
+  Router ID: 10.0.2.0           Address : 10.4.2.4         
+  State    : Full               Mode    : Nbr is Master      Priority: 1
+  DR       : None               BDR     : None               MTU     : 0
+  Dead timer due (in seconds) : 11
+  Retrans timer interval      : 5
+  Neighbor up time            : 03h46m33s
+  Neighbor up time stamp      : 2024-06-06 13:15:47
+  Authentication Sequence     : 0 
+```
+</details>
