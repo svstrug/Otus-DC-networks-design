@@ -244,7 +244,6 @@ ospf 999 router-id 10.0.0.3<br>
  undo silent-interface GE1/0/1<br>
  undo silent-interface GE1/0/2<br>
  area 0.0.0.0<br>
-  description overlay Loopback2<br>
   network 10.0.0.3 0.0.0.0 description underlay Loopback1<br>
   network 10.2.0.3 0.0.0.0 description overlay Loopback2<br>
   network 10.4.1.4 0.0.0.1 description PtP to Spine-1<br>
