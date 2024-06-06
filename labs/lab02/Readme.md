@@ -7,8 +7,9 @@
 ![img_1.png](main_topology2.png)
 
 ### Особенности настройки:
-Изменены стандартные таймеры OSPF на интерфейсах  Timers: Hello 3, Dead 12.<br>
-На Leaf'ах коммутаторах включен silent-interface all (passive interface default), который отключен только на интерфейсах в сторону Spine'ов.
+Изменены стандартные таймеры OSPF на интерфейсах  Timers: Hello 3, Dead 12 с целью улучшения сходимости протокола.<br>
+На Leaf'ах включен silent-interface all (passive interface default), который отключен только на интерфейсах в сторону Spine'ов, чтобы не отправлять hello в клиентские подсети.<br>
+Применена команда ospf network-type p2p для оптимизации работы протокола.
 
 #### Конфигурация на оборудовании Huawei
 <details>
