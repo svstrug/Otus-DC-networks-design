@@ -124,7 +124,7 @@ isis 33<br>
  cost-style wide<br>
  network-entity 49.0052.0100.0000.2000.00<br>
  is-name Spine-2<br>
-#
+#<br>
 interface GE1/0/1<br>
  undo portswitch<br>
  description to Leaf-1<br>
@@ -173,5 +173,63 @@ bfd To_Leaf-2 bind peer-ip 10.4.2.3 interface GE1/0/2<br>
 bfd To_Leaf-3 bind peer-ip 10.4.2.5 interface GE1/0/3<br>
  discriminator local 302<br>
  discriminator remote 32<br>
+#<br>
+</details>
+<details>
+<summary> Leaf-1 </summary>
+#<br>
+sysname Leaf-1<br>
+#<br>
+bfd<br>
+#<br>
+isis 33<br>
+ is-level level-1<br>
+ cost-style wide<br>
+ network-entity 49.0052.0100.0000.0001.00<br>
+ is-name Leaf-1<br>
+#<br>
+interface GE1/0/1<br>
+ undo portswitch<br>
+ description to Spine-1<br>
+ undo shutdown<br>
+ ip address 10.4.1.1 255.255.255.254<br>
+ isis enable 33<br>
+ isis circuit-type p2p<br>
+ isis bfd static<br>
+#<br>
+interface GE1/0/2<br>
+ undo portswitch<br>
+ description to Spine-2<br>
+ undo shutdown<br>
+ ip address 10.4.2.1 255.255.255.254<br>
+ isis enable 33<br>
+ isis circuit-type p2p<br>
+ isis bfd static<br>
+#<br>
+interface GE1/0/9<br>
+ undo portswitch<br>
+ description to Client-1<br>
+ undo shutdown<br>
+ ip address 10.8.0.1 255.255.255.240<br>
+ isis enable 33<br>
+ isis silent <br>
+#<br>
+interface LoopBack1<br>
+ description underlay<br>
+ ip address 10.0.0.1 255.255.255.255<br>
+ isis enable 33<br>
+#<br>
+interface LoopBack2<br>
+ description overlay<br>
+ ip address 10.2.0.1 255.255.255.255<br>
+ isis enable 33<br>
+#<br>
+bfd to_Spine-1 bind peer-ip 10.4.1.0 interface GE1/0/1<br>
+ discriminator local 11<br>
+ discriminator remote 101<br>
+#<br>
+bfd to_Spine-2 bind peer-ip 10.4.2.0 interface GE1/0/2<br>
+ discriminator local 12<br>
+ discriminator remote 102<br>
 #<br>
 </details>
