@@ -754,3 +754,91 @@ Diag : No diagnostic information
 Total BFD session(s): 2
 ```
 </details>
+#### Проверка наличия IP связности между всеми устройствами в OSPF домене
+
+<details>
+ 
+```
+Cl-1> show ip
+
+NAME        : Cl-1[1]
+IP/MASK     : 10.8.0.2/28
+GATEWAY     : 10.8.0.1
+DNS         : 
+MAC         : 00:50:79:66:68:06
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+Clients:
+
+Cl-1> ping 10.8.0.18
+
+84 bytes from 10.8.0.18 icmp_seq=1 ttl=61 time=8.203 ms
+84 bytes from 10.8.0.18 icmp_seq=2 ttl=61 time=3.624 ms
+84 bytes from 10.8.0.18 icmp_seq=3 ttl=61 time=3.745 ms
+84 bytes from 10.8.0.18 icmp_seq=4 ttl=61 time=3.493 ms
+84 bytes from 10.8.0.18 icmp_seq=5 ttl=61 time=3.453 ms
+
+Cl-1> ping 10.8.0.34
+
+84 bytes from 10.8.0.34 icmp_seq=1 ttl=61 time=5.133 ms
+84 bytes from 10.8.0.34 icmp_seq=2 ttl=61 time=3.429 ms
+84 bytes from 10.8.0.34 icmp_seq=3 ttl=61 time=3.227 ms
+84 bytes from 10.8.0.34 icmp_seq=4 ttl=61 time=4.088 ms
+84 bytes from 10.8.0.34 icmp_seq=5 ttl=61 time=5.524 ms
+
+Cl-1> ping 10.8.0.42
+
+84 bytes from 10.8.0.42 icmp_seq=1 ttl=61 time=4.425 ms
+84 bytes from 10.8.0.42 icmp_seq=2 ttl=61 time=4.249 ms
+84 bytes from 10.8.0.42 icmp_seq=3 ttl=61 time=3.607 ms
+84 bytes from 10.8.0.42 icmp_seq=4 ttl=61 time=4.318 ms
+84 bytes from 10.8.0.42 icmp_seq=5 ttl=61 time=4.359 ms
+
+Leaf's:
+
+Cl-1> ping 10.0.0.1
+
+84 bytes from 10.0.0.1 icmp_seq=1 ttl=255 time=3.375 ms
+84 bytes from 10.0.0.1 icmp_seq=2 ttl=255 time=1.141 ms
+84 bytes from 10.0.0.1 icmp_seq=3 ttl=255 time=1.316 ms
+84 bytes from 10.0.0.1 icmp_seq=4 ttl=255 time=2.019 ms
+84 bytes from 10.0.0.1 icmp_seq=5 ttl=255 time=1.084 ms
+
+Cl-1> ping 10.0.0.2
+
+84 bytes from 10.0.0.2 icmp_seq=1 ttl=253 time=5.829 ms
+84 bytes from 10.0.0.2 icmp_seq=2 ttl=253 time=4.099 ms
+84 bytes from 10.0.0.2 icmp_seq=3 ttl=253 time=3.723 ms
+84 bytes from 10.0.0.2 icmp_seq=4 ttl=253 time=3.762 ms
+84 bytes from 10.0.0.2 icmp_seq=5 ttl=253 time=3.895 ms
+
+Cl-1> ping 10.0.0.3
+
+84 bytes from 10.0.0.3 icmp_seq=1 ttl=253 time=7.396 ms
+84 bytes from 10.0.0.3 icmp_seq=2 ttl=253 time=5.383 ms
+84 bytes from 10.0.0.3 icmp_seq=3 ttl=253 time=3.209 ms
+84 bytes from 10.0.0.3 icmp_seq=4 ttl=253 time=4.323 ms
+84 bytes from 10.0.0.3 icmp_seq=5 ttl=253 time=3.521 ms
+
+Spines:
+
+Cl-1> ping 10.0.1.0
+
+84 bytes from 10.0.1.0 icmp_seq=1 ttl=254 time=7.850 ms
+84 bytes from 10.0.1.0 icmp_seq=2 ttl=254 time=2.083 ms
+84 bytes from 10.0.1.0 icmp_seq=3 ttl=254 time=2.445 ms
+84 bytes from 10.0.1.0 icmp_seq=4 ttl=254 time=2.003 ms
+84 bytes from 10.0.1.0 icmp_seq=5 ttl=254 time=2.379 ms
+
+Cl-1> ping 10.0.2.0
+
+84 bytes from 10.0.2.0 icmp_seq=1 ttl=254 time=6.598 ms
+84 bytes from 10.0.2.0 icmp_seq=2 ttl=254 time=2.817 ms
+84 bytes from 10.0.2.0 icmp_seq=3 ttl=254 time=2.604 ms
+84 bytes from 10.0.2.0 icmp_seq=4 ttl=254 time=2.394 ms
+84 bytes from 10.0.2.0 icmp_seq=5 ttl=254 time=2.183 ms
+
+```
+</details>
