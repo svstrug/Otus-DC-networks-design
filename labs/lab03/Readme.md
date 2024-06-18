@@ -519,3 +519,238 @@ Diag : No diagnostic information
 Total BFD session(s): 3
 ```
 </details>
+<details>
+<summary> Leaf-1 diag </summary>
+ 
+ ```
+<Leaf-1>display ip routing-table 
+Proto: Protocol        Pre: Preference
+Route Flags: R - relay, D - download to fib, T - to vpn-instance, B - black hole route
+------------------------------------------------------------------------------
+Routing Table : _public_
+         Destinations : 28       Routes : 35        
+
+Destination/Mask    Proto   Pre  Cost        Flags NextHop         Interface
+
+       10.0.0.1/32  Direct  0    0             D   127.0.0.1       LoopBack1
+       10.0.0.2/32  ISIS-L1 15   20            D   10.4.1.0        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.0        GE1/0/2
+       10.0.0.3/32  ISIS-L1 15   20            D   10.4.1.0        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.0        GE1/0/2
+       10.0.1.0/32  ISIS-L1 15   10            D   10.4.1.0        GE1/0/1
+       10.0.2.0/32  ISIS-L1 15   10            D   10.4.2.0        GE1/0/2
+       10.2.0.1/32  Direct  0    0             D   127.0.0.1       LoopBack2
+       10.2.0.2/32  ISIS-L1 15   20            D   10.4.1.0        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.0        GE1/0/2
+       10.2.0.3/32  ISIS-L1 15   20            D   10.4.1.0        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.0        GE1/0/2
+       10.2.1.0/32  ISIS-L1 15   10            D   10.4.1.0        GE1/0/1
+       10.2.2.0/32  ISIS-L1 15   10            D   10.4.2.0        GE1/0/2
+       10.4.1.0/31  Direct  0    0             D   10.4.1.1        GE1/0/1
+       10.4.1.1/32  Direct  0    0             D   127.0.0.1       GE1/0/1
+       10.4.1.2/31  ISIS-L1 15   20            D   10.4.1.0        GE1/0/1
+       10.4.1.4/31  ISIS-L1 15   20            D   10.4.1.0        GE1/0/1
+       10.4.2.0/31  Direct  0    0             D   10.4.2.1        GE1/0/2
+       10.4.2.1/32  Direct  0    0             D   127.0.0.1       GE1/0/2
+       10.4.2.2/31  ISIS-L1 15   20            D   10.4.2.0        GE1/0/2
+       10.4.2.4/31  ISIS-L1 15   20            D   10.4.2.0        GE1/0/2
+       10.8.0.0/28  Direct  0    0             D   10.8.0.1        GE1/0/9
+       10.8.0.1/32  Direct  0    0             D   127.0.0.1       GE1/0/9
+      10.8.0.15/32  Direct  0    0             D   127.0.0.1       GE1/0/9
+      10.8.0.16/28  ISIS-L1 15   30            D   10.4.1.0        GE1/0/1
+                    ISIS-L1 15   30            D   10.4.2.0        GE1/0/2
+      10.8.0.32/29  ISIS-L1 15   30            D   10.4.1.0        GE1/0/1
+                    ISIS-L1 15   30            D   10.4.2.0        GE1/0/2
+      10.8.0.40/29  ISIS-L1 15   30            D   10.4.1.0        GE1/0/1
+                    ISIS-L1 15   30            D   10.4.2.0        GE1/0/2
+      127.0.0.0/8   Direct  0    0             D   127.0.0.1       InLoopBack0
+      127.0.0.1/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+127.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+255.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+
+<Leaf-1> display isis peer 
+
+Peer Information for ISIS(33)
+--------------------------------------------------------------------------------
+                         
+  System Id     Interface       Circuit Id        State HoldTime(s) Type     PRI
+--------------------------------------------------------------------------------
+Spine-1         GE1/0/1         0000000006         Up            22 L1       -- 
+Spine-2         GE1/0/2         0000000006         Up            25 L1       -- 
+
+Total Peer(s): 2
+
+<Leaf-1>display isis bfd session all 
+
+BFD session information for ISIS(33)
+------------------------------------------------------------------------------
+Peer System ID : Spine-1               Interface : GE1/0/1            
+TX : 1000          BFD State : up      Peer IP Address : 10.4.1.0
+RX : 1000          LocDis : 11         Local IP Address: 0.0.0.0
+Multiplier : 3     RemDis : 101        Type : L1  
+Diag : No diagnostic information
+Peer System ID : Spine-2               Interface : GE1/0/2            
+TX : 1000          BFD State : up      Peer IP Address : 10.4.2.0
+RX : 1000          LocDis : 12         Local IP Address: 0.0.0.0
+Multiplier : 3     RemDis : 102        Type : L1  
+Diag : No diagnostic information
+Total BFD session(s): 2
+```
+</details>
+<details>
+<summary> Leaf-2 diag </summary>
+ 
+ ```
+<Leaf-2> display ip routing-table 
+Proto: Protocol        Pre: Preference
+Route Flags: R - relay, D - download to fib, T - to vpn-instance, B - black hole route
+------------------------------------------------------------------------------
+Routing Table : _public_
+         Destinations : 28       Routes : 35        
+
+Destination/Mask    Proto   Pre  Cost        Flags NextHop         Interface
+
+       10.0.0.1/32  ISIS-L1 15   20            D   10.4.1.2        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.2        GE1/0/2
+       10.0.0.2/32  Direct  0    0             D   127.0.0.1       LoopBack1
+       10.0.0.3/32  ISIS-L1 15   20            D   10.4.1.2        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.2        GE1/0/2
+       10.0.1.0/32  ISIS-L1 15   10            D   10.4.1.2        GE1/0/1
+       10.0.2.0/32  ISIS-L1 15   10            D   10.4.2.2        GE1/0/2
+       10.2.0.1/32  ISIS-L1 15   20            D   10.4.1.2        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.2        GE1/0/2
+       10.2.0.2/32  Direct  0    0             D   127.0.0.1       LoopBack2
+       10.2.0.3/32  ISIS-L1 15   20            D   10.4.1.2        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.2        GE1/0/2
+       10.2.1.0/32  ISIS-L1 15   10            D   10.4.1.2        GE1/0/1
+       10.2.2.0/32  ISIS-L1 15   10            D   10.4.2.2        GE1/0/2
+       10.4.1.0/31  ISIS-L1 15   20            D   10.4.1.2        GE1/0/1
+       10.4.1.2/31  Direct  0    0             D   10.4.1.3        GE1/0/1
+       10.4.1.3/32  Direct  0    0             D   127.0.0.1       GE1/0/1
+       10.4.1.4/31  ISIS-L1 15   20            D   10.4.1.2        GE1/0/1
+       10.4.2.0/31  ISIS-L1 15   20            D   10.4.2.2        GE1/0/2
+       10.4.2.2/31  Direct  0    0             D   10.4.2.3        GE1/0/2
+       10.4.2.3/32  Direct  0    0             D   127.0.0.1       GE1/0/2
+       10.4.2.4/31  ISIS-L1 15   20            D   10.4.2.2        GE1/0/2
+       10.8.0.0/28  ISIS-L1 15   30            D   10.4.1.2        GE1/0/1
+                    ISIS-L1 15   30            D   10.4.2.2        GE1/0/2
+      10.8.0.16/28  Direct  0    0             D   10.8.0.17       GE1/0/9
+      10.8.0.17/32  Direct  0    0             D   127.0.0.1       GE1/0/9
+      10.8.0.31/32  Direct  0    0             D   127.0.0.1       GE1/0/9
+      10.8.0.32/29  ISIS-L1 15   30            D   10.4.1.2        GE1/0/1
+                    ISIS-L1 15   30            D   10.4.2.2        GE1/0/2
+      10.8.0.40/29  ISIS-L1 15   30            D   10.4.1.2        GE1/0/1
+                    ISIS-L1 15   30            D   10.4.2.2        GE1/0/2
+      127.0.0.0/8   Direct  0    0             D   127.0.0.1       InLoopBack0
+      127.0.0.1/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+127.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+255.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+
+<Leaf-2>display isis peer 
+
+Peer Information for ISIS(33)
+--------------------------------------------------------------------------------
+                         
+  System Id     Interface       Circuit Id        State HoldTime(s) Type     PRI
+--------------------------------------------------------------------------------
+Spine-1         GE1/0/1         0000000007         Up            25 L1       -- 
+Spine-2         GE1/0/2         0000000007         Up            24 L1       -- 
+
+Total Peer(s): 2
+
+<Leaf-2>display isis bfd session all 
+
+BFD session information for ISIS(33)
+------------------------------------------------------------------------------
+Peer System ID : Spine-1               Interface : GE1/0/1            
+TX : 1000          BFD State : up      Peer IP Address : 10.4.1.2
+RX : 1000          LocDis : 21         Local IP Address: 0.0.0.0
+Multiplier : 3     RemDis : 201        Type : L1  
+Diag : No diagnostic information
+Peer System ID : Spine-2               Interface : GE1/0/2            
+TX : 1000          BFD State : up      Peer IP Address : 10.4.2.2
+RX : 1000          LocDis : 22         Local IP Address: 0.0.0.0
+Multiplier : 3     RemDis : 202        Type : L1  
+Diag : No diagnostic information
+Total BFD session(s): 2
+```
+</details>
+<details>
+<summary> Leaf-3 diag </summary>
+ 
+ ```
+<Leaf-3>display ip routing-table 
+Proto: Protocol        Pre: Preference
+Route Flags: R - relay, D - download to fib, T - to vpn-instance, B - black hole route
+------------------------------------------------------------------------------
+Routing Table : _public_
+         Destinations : 30       Routes : 36        
+
+Destination/Mask    Proto   Pre  Cost        Flags NextHop         Interface
+
+       10.0.0.1/32  ISIS-L1 15   20            D   10.4.1.4        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.4        GE1/0/2
+       10.0.0.2/32  ISIS-L1 15   20            D   10.4.1.4        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.4        GE1/0/2
+       10.0.0.3/32  Direct  0    0             D   127.0.0.1       LoopBack1
+       10.0.1.0/32  ISIS-L1 15   10            D   10.4.1.4        GE1/0/1
+       10.0.2.0/32  ISIS-L1 15   10            D   10.4.2.4        GE1/0/2
+       10.2.0.1/32  ISIS-L1 15   20            D   10.4.1.4        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.4        GE1/0/2
+       10.2.0.2/32  ISIS-L1 15   20            D   10.4.1.4        GE1/0/1
+                    ISIS-L1 15   20            D   10.4.2.4        GE1/0/2
+       10.2.0.3/32  Direct  0    0             D   127.0.0.1       LoopBack2
+       10.2.1.0/32  ISIS-L1 15   10            D   10.4.1.4        GE1/0/1
+       10.2.2.0/32  ISIS-L1 15   10            D   10.4.2.4        GE1/0/2
+       10.4.1.0/31  ISIS-L1 15   20            D   10.4.1.4        GE1/0/1
+       10.4.1.2/31  ISIS-L1 15   20            D   10.4.1.4        GE1/0/1
+       10.4.1.4/31  Direct  0    0             D   10.4.1.5        GE1/0/1
+       10.4.1.5/32  Direct  0    0             D   127.0.0.1       GE1/0/1
+       10.4.2.0/31  ISIS-L1 15   20            D   10.4.2.4        GE1/0/2
+       10.4.2.2/31  ISIS-L1 15   20            D   10.4.2.4        GE1/0/2
+       10.4.2.4/31  Direct  0    0             D   10.4.2.5        GE1/0/2
+       10.4.2.5/32  Direct  0    0             D   127.0.0.1       GE1/0/2
+       10.8.0.0/28  ISIS-L1 15   30            D   10.4.1.4        GE1/0/1
+                    ISIS-L1 15   30            D   10.4.2.4        GE1/0/2
+      10.8.0.16/28  ISIS-L1 15   30            D   10.4.1.4        GE1/0/1
+                    ISIS-L1 15   30            D   10.4.2.4        GE1/0/2
+      10.8.0.32/29  Direct  0    0             D   10.8.0.33       GE1/0/9
+      10.8.0.33/32  Direct  0    0             D   127.0.0.1       GE1/0/9
+      10.8.0.39/32  Direct  0    0             D   127.0.0.1       GE1/0/9
+      10.8.0.40/29  Direct  0    0             D   10.8.0.41       GE1/0/8
+      10.8.0.41/32  Direct  0    0             D   127.0.0.1       GE1/0/8
+      10.8.0.47/32  Direct  0    0             D   127.0.0.1       GE1/0/8
+      127.0.0.0/8   Direct  0    0             D   127.0.0.1       InLoopBack0
+      127.0.0.1/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+127.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+255.255.255.255/32  Direct  0    0             D   127.0.0.1       InLoopBack0
+
+<Leaf-3> display isis peer 
+
+Peer Information for ISIS(33)
+--------------------------------------------------------------------------------
+                         
+  System Id     Interface       Circuit Id        State HoldTime(s) Type     PRI
+--------------------------------------------------------------------------------
+Spine-1         GE1/0/1         0000000008         Up            30 L1       -- 
+Spine-2         GE1/0/2         0000000008         Up            28 L1       -- 
+
+Total Peer(s): 2
+
+<Leaf-3>display isis bfd session all
+
+BFD session information for ISIS(33)
+------------------------------------------------------------------------------
+Peer System ID : Spine-1               Interface : GE1/0/1            
+TX : 1000          BFD State : up      Peer IP Address : 10.4.1.4
+RX : 1000          LocDis : 31         Local IP Address: 0.0.0.0
+Multiplier : 3     RemDis : 301        Type : L1  
+Diag : No diagnostic information
+Peer System ID : Spine-2               Interface : GE1/0/2            
+TX : 1000          BFD State : up      Peer IP Address : 10.4.2.4
+RX : 1000          LocDis : 32         Local IP Address: 0.0.0.0
+Multiplier : 3     RemDis : 302        Type : L1  
+Diag : No diagnostic information
+Total BFD session(s): 2
+```
+</details>
