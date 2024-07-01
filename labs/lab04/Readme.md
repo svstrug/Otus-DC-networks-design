@@ -1250,9 +1250,8 @@ FE80::/10                                    Direct  0    0           DB    ::  
 </details>
 
 #### Проверка наличия IP связности между всеми устройствами в POD.
-<details>
+
 ![img_2.png](diag_client1_1.png)
 ![img_3.png](diag_client1_2.png)
 ![img_4.png](diag_client1_3.png)
 ![img_5.png](diag_client1_4.png)
-</details>
