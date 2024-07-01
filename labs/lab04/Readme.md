@@ -177,3 +177,189 @@ bgp 4200000001<br>
   peer FD01::10:4:2:5 route-update-interval 0<br>
 #<br>
 </details>
+<details>
+<summary> Leaf-1 </summary>
+#<br>
+sysname Leaf-1<br>
+#<br>
+as-notation plain<br>
+#<br>
+interface GE1/0/1<br>
+ undo portswitch<br>
+ description to Spine-1<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:1:1/127<br>
+#<br>
+interface GE1/0/2<br>
+ undo portswitch<br>
+ description to Spine-2<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:2:1/127<br>
+#<br>
+interface GE1/0/9<br>
+ undo portswitch<br>
+ description to Client-1<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::1:10:8:0:1/64<br>
+#<br>
+interface LoopBack1<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:0:0:1/128<br>
+#<br>
+interface LoopBack2<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:2:0:1/128<br>
+#<br>
+bgp 4200000011<br>
+ router-id 10.0.0.1<br>
+ timer keepalive 3 hold 9<br>
+ peer FD01::10:4:1:0 as-number 4200000001<br>
+ peer FD01::10:4:1:0 description Spine-1<br>
+ peer FD01::10:4:1:0 password cipher %^%#uTh@5'|]YR7S)!TsyH!So-rPJg^Ty83pg|#c(I\E%^%#<br>
+ peer FD01::10:4:2:0 as-number 4200000001<br>
+ peer FD01::10:4:2:0 description Spine-2<br>
+ peer FD01::10:4:2:0 password cipher %^%#/#luU_d$D2"0blE){-529WJ$>OQ$!UOOZz6tNgHX%^%#<br>
+ #<br>
+  ipv6-family unicast<br>
+  network FD01::10:0:0:1 128<br>
+  network FD01::10:2:0:1 128<br>
+  network FD01::10:4:1:0 127<br>
+  network FD01::10:4:2:0 127<br>
+  network FD01:0:0:1:: 64<br>
+  peer FD01::10:4:1:0 enable<br>
+  peer FD01::10:4:1:0 route-update-interval 0<br>
+  peer FD01::10:4:2:0 enable<br>
+  peer FD01::10:4:2:0 route-update-interval 0<br>
+#<br>
+</details>
+<details>
+<summary> Leaf-2 </summary>
+#<br>
+sysname Leaf-2<br>
+#<br>
+as-notation plain<br>
+#<br>
+interface GE1/0/1<br>
+ undo portswitch<br>
+ description to Spine-1<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:1:3/127<br>
+#<br>
+interface GE1/0/2<br>
+ undo portswitch<br>
+ description to Spine-2<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:2:3/127<br>
+#<br>
+interface GE1/0/9<br>
+ undo portswitch<br>
+ description to Client-2<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::2:10:8:0:17/64<br>
+#<br>
+interface LoopBack1<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:0:0:2/128<br>
+#<br>
+interface LoopBack2<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:2:0:2/128<br>
+#<br>
+bgp 4200000012<br>
+ router-id 10.0.0.2<br>
+ timer keepalive 3 hold 9<br>
+ peer FD01::10:4:1:2 as-number 4200000001<br>
+ peer FD01::10:4:1:2 description Spine-1<br>
+ peer FD01::10:4:1:2 password cipher %^%#uTh@5'|]YR7S)!TsyH!So-rPJg^Ty83pg|#c(I\E%^%#<br>
+ peer FD01::10:4:2:2 as-number 4200000001<br>
+ peer FD01::10:4:2:2 description Spine-2<br>
+ peer FD01::10:4:2:2 password cipher %^%#/#luU_d$D2"0blE){-529WJ$>OQ$!UOOZz6tNgHX%^%#<br>
+ #<br>
+ ipv4-family unicast<br>
+ #<br>
+ ipv6-family unicast<br>
+  network FD01::10:0:0:2 128<br>
+  network FD01::10:2:0:2 128<br>
+  network FD01::10:4:1:2 127<br>
+  network FD01::10:4:2:2 127<br>
+  network FD01:0:0:2:: 64<br>
+  peer FD01::10:4:1:2 enable<br>
+  peer FD01::10:4:1:2 route-update-interval 0<br>
+  peer FD01::10:4:2:2 enable<br>
+  peer FD01::10:4:2:2 route-update-interval 0<br>
+#<br>
+</details>
+<details>
+<summary> Leaf-3 </summary>
+#<br>
+ sysname Leaf-3<br>
+#<br>
+as-notation plain<br>
+#<br>
+interface GE1/0/1<br>
+ undo portswitch<br>
+ description to Spine-1<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:1:5/127<br>
+#<br>
+interface GE1/0/2<br>
+ undo portswitch<br>
+ description to Spine-2<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:2:5/127<br>
+#<br>
+interface GE1/0/8<br>
+ undo portswitch<br>
+ description to Client-4<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::4:10:8:0:41/64<br>
+#<br>
+interface GE1/0/9<br>
+ undo portswitch<br>
+ description to Client-3<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::3:10:8:0:33/64<br>
+#<br>
+interface LoopBack1<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:0:0:3/128<br>
+#<br>
+interface LoopBack2<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:2:0:3/128<br>
+#<br>
+bgp 4200000013<br>
+ router-id 10.0.0.3<br>
+ timer keepalive 3 hold 9<br>
+ peer FD01::10:4:1:4 as-number 4200000001<br>
+ peer FD01::10:4:1:4 description Spine-1<br>
+ peer FD01::10:4:1:4 password cipher %^%#uTh@5'|]YR7S)!TsyH!So-rPJg^Ty83pg|#c(I\E%^%#<br>
+ peer FD01::10:4:2:4 as-number 4200000001<br>
+ peer FD01::10:4:2:4 description Spine-2<br>
+ peer FD01::10:4:2:4 password cipher %^%#/#luU_d$D2"0blE){-529WJ$>OQ$!UOOZz6tNgHX%^%#<br>
+ #<br>
+ ipv4-family unicast<br>
+ #<br>
+ ipv6-family unicast<br>
+  network FD01::10:0:0:3 128<br>
+  network FD01::10:2:0:3 128<br>
+  network FD01::10:4:1:4 127<br>
+  network FD01::10:4:2:4 127<br>
+  network FD01:0:0:3:: 64<br>
+  network FD01:0:0:4:: 64<br>
+  peer FD01::10:4:1:4 enable<br>
+  peer FD01::10:4:1:4 route-update-interval 0<br>
+  peer FD01::10:4:2:4 enable<br>
+  peer FD01::10:4:2:4 route-update-interval 0<br>
+#<br>
+</details>
