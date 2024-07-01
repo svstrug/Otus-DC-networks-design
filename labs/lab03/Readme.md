@@ -754,7 +754,7 @@ Diag : No diagnostic information
 Total BFD session(s): 2
 ```
 </details>
-#### Проверка наличия IP связности между всеми устройствами в OSPF домене
+#### Проверка наличия IP связности между всеми устройствами в IS-IS домене
 
 <details>
  
