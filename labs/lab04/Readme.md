@@ -93,7 +93,7 @@ bgp 4200000001<br>
  peer FD01::10:4:1:1 password cipher %^%#1`tQG=.lB1\i$"N|b&>=;B&sSzH*BQn9Fu;DL_@9%^%#<br>
  peer FD01::10:4:1:3 as-number 4200000012<br>
  peer FD01::10:4:1:3 description Leaf-2<br>
- peer FD01::10:4:1:3 password cipher %^%#rv[U&i:I8R]7;:&P97+H9G+`I3-gC,C4\<T<3tQY%^%#<br>
+ peer FD01::10:4:1:3 password cipher %^%#rv[U&i:I8R]7;:&P97+H9G+`I3-gC,C4\T<3tQY%^%#<br>
  peer FD01::10:4:1:5 as-number 4200000013<br>
  peer FD01::10:4:1:5 description Leaf-3<br>
  peer FD01::10:4:1:5 password cipher %^%#t[RpO-[\I&6#5^1E=+@&DcI#KmwMa1K)/^,^mxqR%^%#<br>
