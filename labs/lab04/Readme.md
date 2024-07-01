@@ -1250,7 +1250,7 @@ FE80::/10                                    Direct  0    0           DB    ::  
 </details>
 
 #### Проверка наличия IP связности между всеми устройствами в POD.
-Таблица маршрутизации и настройка IP<br>
+Таблица маршрутизации и настройка IP на Client-1<br>
 ![image](diag_client1_1.png)
 
 Ping до IP Client-2, Client-3, Client-4<br>
