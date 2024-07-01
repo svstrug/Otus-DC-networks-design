@@ -47,3 +47,68 @@ Client-1|eth0|fd01::1:10:8:0:2|/64
 Client-2|eth0|fd01::2:10:8:0:18|/64
 Client-3|eth0|fd01::3:10:8:0:34|/64
 Client-4|eth0|fd01::4:10:8:0:42|/64
+
+#### Конфигурация на оборудовании Huawei
+<details>
+<summary> Spine-1 </summary>
+#<br>
+sysname Spine-1<br>
+#<br>
+as-notation plain<br>
+#<br>
+interface GE1/0/1<br>
+ undo portswitch<br>
+ description to Leaf-1<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:1:0/127<br>
+#<br>
+interface GE1/0/2<br>
+ undo portswitch<br>
+ description to Leaf-2<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:1:2/127<br>
+#<br>
+interface GE1/0/3<br>
+ undo portswitch<br>
+ description to Leaf-3<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:1:4/127<br>
+#<br>
+interface LoopBack1<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:0:1:0/128<br>
+#<br>
+interface LoopBack2<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:2:1:0/128<br>
+#<br>
+bgp 4200000001<br>
+ router-id 10.0.1.0<br>
+ timer keepalive 3 hold 9<br>
+ peer FD01::10:4:1:1 as-number 4200000011<br>
+ peer FD01::10:4:1:1 description Leaf-1<br>
+ peer FD01::10:4:1:1 password cipher %^%#1`tQG=.lB1\i$"N|b&>=;B&sSzH*BQn9Fu;DL_@9%^%#<br>
+ peer FD01::10:4:1:3 as-number 4200000012<br>
+ peer FD01::10:4:1:3 description Leaf-2<br>
+ peer FD01::10:4:1:3 password cipher %^%#rv[U&i:I8R]7;:&P97+H9G+`I3-gC,C4\<T<3tQY%^%#<br>
+ peer FD01::10:4:1:5 as-number 4200000013<br>
+ peer FD01::10:4:1:5 description Leaf-3<br>
+ peer FD01::10:4:1:5 password cipher %^%#t[RpO-[\I&6#5^1E=+@&DcI#KmwMa1K)/^,^mxqR%^%#<br>
+ #<br>
+ ipv6-family unicast<br>
+  network FD01::10:0:1:0 128<br>
+  network FD01::10:2:1:0 128<br>
+  network FD01::10:4:1:0 127<br>
+  network FD01::10:4:1:2 127<br>
+  network FD01::10:4:1:4 127<br>
+  peer FD01::10:4:1:1 enable<br>
+  peer FD01::10:4:1:1 route-update-interval 0<br>
+  peer FD01::10:4:1:3 enable<br>
+  peer FD01::10:4:1:3 route-update-interval 0<br>
+  peer FD01::10:4:1:5 enable<br>
+  peer FD01::10:4:1:5 route-update-interval 0<br>
+#<br>
+</details>
