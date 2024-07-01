@@ -112,3 +112,68 @@ bgp 4200000001<br>
   peer FD01::10:4:1:5 route-update-interval 0<br>
 #<br>
 </details>
+<details>
+<summary> Spine-2 </summary>
+#<br>
+sysname Spine-2<br>
+#<br>
+as-notation plain<br>
+#<br>
+interface GE1/0/1<br>
+ undo portswitch<br>
+ description to Leaf-1<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:2:0/127<br>
+#<br>
+interface GE1/0/2<br>
+ undo portswitch<br>
+ description to Leaf-2<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:2:2/127<br>
+#<br>
+interface GE1/0/3<br>
+ undo portswitch<br>
+ description to Leaf-3<br>
+ undo shutdown<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:4:2:4/127<br>
+#<br>
+interface LoopBack1<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:0:2:0/128<br>
+#<br>
+interface LoopBack2<br>
+ ipv6 enable<br>
+ ipv6 address FD01::10:2:2:0/128<br>
+#<br>
+bgp 4200000001<br>
+ router-id 10.0.2.0<br>
+ timer keepalive 3 hold 9<br>
+ peer FD01::10:4:2:1 as-number 4200000011<br>
+ peer FD01::10:4:2:1 description Leaf-1<br>
+ peer FD01::10:4:2:1 password cipher %^%#_7Wk*6xNp3Sz!M;"bj"H{rbv.1SuA(M.YgBM0CW&%^%#<br>
+ peer FD01::10:4:2:3 as-number 4200000012<br>
+ peer FD01::10:4:2:3 description Leaf-2<br>
+ peer FD01::10:4:2:3 password cipher %^%#hD]yHe4[8HCbN+%}ly~DGmC9C$QcxHsTVuV)z2dC%^%#<br>
+ peer FD01::10:4:2:5 as-number 4200000013<br>
+ peer FD01::10:4:2:5 description Leaf-3<br>
+ peer FD01::10:4:2:5 password cipher %^%#=r|xFh(u$MKmhGS:9{mBB-3I:9X--PQ>eL-v@f}F%^%#<br>
+ #<br>
+ ipv4-family unicast<br>
+ #<br>
+ ipv6-family unicast<br>
+  network FD01::10:0:2:0 128<br>
+  network FD01::10:2:2:0 128<br>
+  network FD01::10:4:2:0 127<br>
+  network FD01::10:4:2:2 127<br>
+  network FD01::10:4:2:4 127<br>
+  peer FD01::10:4:2:1 enable<br>
+  peer FD01::10:4:2:1 route-update-interval 0<br>
+  peer FD01::10:4:2:3 enable<br>
+  peer FD01::10:4:2:3 route-update-interval 0<br>
+  peer FD01::10:4:2:5 enable<br>
+  peer FD01::10:4:2:5 route-update-interval 0<br>
+#<br>
+</details>
