@@ -4,7 +4,7 @@
 - 1: Настроить BGP для Underlay сети
 
 ### Собрана топология:
-![img_1.png](main_topology_lab04.png)
+![image](main_topology_lab04.png)
 Spine и Leaf - Huawei CE12800, Clients - Linux<br>
 
 ### Особенности настройки:
@@ -1251,8 +1251,7 @@ FE80::/10                                    Direct  0    0           DB    ::  
 
 #### Проверка наличия IP связности между всеми устройствами в POD.
 
-![img_2.png](diag_client1_1.png)
-
-![img_3.png](diag_client1_2.png)
-![img_4.png](diag_client1_3.png)
-![img_5.png](diag_client1_4.png)
+![image](diag_client1_1.png)
+![image](diag_client1_2.png)
+![image](diag_client1_3.png)
+![image](diag_client1_4.png)
