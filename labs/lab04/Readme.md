@@ -161,8 +161,6 @@ bgp 4200000001<br>
  peer FD01::10:4:2:5 description Leaf-3<br>
  peer FD01::10:4:2:5 password cipher %^%#=r|xFh(u$MKmhGS:9{mBB-3I:9X--PQ>eL-v@f}F%^%#<br>
  #<br>
- ipv4-family unicast<br>
- #<br>
  ipv6-family unicast<br>
   network FD01::10:0:2:0 128<br>
   network FD01::10:2:2:0 128<br>
@@ -281,8 +279,6 @@ bgp 4200000012<br>
  peer FD01::10:4:2:2 description Spine-2<br>
  peer FD01::10:4:2:2 password cipher %^%#/#luU_d$D2"0blE){-529WJ$>OQ$!UOOZz6tNgHX%^%#<br>
  #<br>
- ipv4-family unicast<br>
- #<br>
  ipv6-family unicast<br>
   network FD01::10:0:0:2 128<br>
   network FD01::10:2:0:2 128<br>
@@ -347,8 +343,6 @@ bgp 4200000013<br>
  peer FD01::10:4:2:4 as-number 4200000001<br>
  peer FD01::10:4:2:4 description Spine-2<br>
  peer FD01::10:4:2:4 password cipher %^%#/#luU_d$D2"0blE){-529WJ$>OQ$!UOOZz6tNgHX%^%#<br>
- #<br>
- ipv4-family unicast<br>
  #<br>
  ipv6-family unicast<br>
   network FD01::10:0:0:3 128<br>
