@@ -1254,10 +1254,10 @@ FE80::/10                                    Direct  0    0           DB    ::  
 ![image](diag_client1_1.png)
 
 Ping до IP Client-2, Client-3, Client-4<br>
-![image](diag_client1_2.png)
+![image](diag_client1_2.PNG)
 
 Ping до IP Lo1 Leaf's<br>
-![image](diag_client1_3.png)
+![image](diag_client1_3.PNG)
 
 Ping до IP Lo1 Spine's<br>
-![image](diag_client1_4.png)
+![image](diag_client1_4.PNG)
