@@ -841,3 +841,60 @@ RHOST:PORT  : 127.0.0.1:30000
 MTU         : 1500
 ```
 </details>
+
+#### Проверка наличия IP связности между всеми устройствами в vlan 10/VNI 10.
+
+<details>
+ 
+```
+Связность через L2 VXLAN VNI 10
+Cl-1> ping 192.168.1.2
+
+84 bytes from 192.168.1.2 icmp_seq=1 ttl=64 time=85.010 ms
+84 bytes from 192.168.1.2 icmp_seq=2 ttl=64 time=15.033 ms
+84 bytes from 192.168.1.2 icmp_seq=3 ttl=64 time=15.018 ms
+84 bytes from 192.168.1.2 icmp_seq=4 ttl=64 time=15.207 ms
+84 bytes from 192.168.1.2 icmp_seq=5 ttl=64 time=16.443 ms
+
+Cl-1> ping 192.168.1.3
+
+84 bytes from 192.168.1.3 icmp_seq=1 ttl=64 time=56.063 ms
+84 bytes from 192.168.1.3 icmp_seq=2 ttl=64 time=15.659 ms
+84 bytes from 192.168.1.3 icmp_seq=3 ttl=64 time=18.470 ms
+84 bytes from 192.168.1.3 icmp_seq=4 ttl=64 time=18.796 ms
+84 bytes from 192.168.1.3 icmp_seq=5 ttl=64 time=13.999 ms
+
+Cl-1> ping 192.168.1.4
+
+84 bytes from 192.168.1.4 icmp_seq=1 ttl=64 time=66.293 ms
+84 bytes from 192.168.1.4 icmp_seq=2 ttl=64 time=19.296 ms
+84 bytes from 192.168.1.4 icmp_seq=3 ttl=64 time=14.704 ms
+84 bytes from 192.168.1.4 icmp_seq=4 ttl=64 time=15.593 ms
+84 bytes from 192.168.1.4 icmp_seq=5 ttl=64 time=14.048 ms
+
+Cl-2> ping 192.168.1.3
+
+84 bytes from 192.168.1.3 icmp_seq=1 ttl=64 time=14.671 ms
+84 bytes from 192.168.1.3 icmp_seq=2 ttl=64 time=21.438 ms
+84 bytes from 192.168.1.3 icmp_seq=3 ttl=64 time=16.146 ms
+84 bytes from 192.168.1.3 icmp_seq=4 ttl=64 time=14.872 ms
+84 bytes from 192.168.1.3 icmp_seq=5 ttl=64 time=14.573 ms
+
+Cl-2> ping 192.168.1.4
+
+84 bytes from 192.168.1.4 icmp_seq=1 ttl=64 time=14.715 ms
+84 bytes from 192.168.1.4 icmp_seq=2 ttl=64 time=16.470 ms
+84 bytes from 192.168.1.4 icmp_seq=3 ttl=64 time=15.152 ms
+84 bytes from 192.168.1.4 icmp_seq=4 ttl=64 time=14.989 ms
+84 bytes from 192.168.1.4 icmp_seq=5 ttl=64 time=16.131 ms
+
+Локальная связность через L2 VLAN 10
+Cl-3> ping 192.168.1.4
+
+84 bytes from 192.168.1.4 icmp_seq=1 ttl=64 time=8.351 ms
+84 bytes from 192.168.1.4 icmp_seq=2 ttl=64 time=4.616 ms
+84 bytes from 192.168.1.4 icmp_seq=3 ttl=64 time=4.875 ms
+84 bytes from 192.168.1.4 icmp_seq=4 ttl=64 time=4.814 ms
+84 bytes from 192.168.1.4 icmp_seq=5 ttl=64 time=4.663 ms
+```
+</details>
