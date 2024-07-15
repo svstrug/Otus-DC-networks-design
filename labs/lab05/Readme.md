@@ -379,3 +379,88 @@ router ospf 1<br>
    network 0.0.0.0/0 area 0.0.0.0<br>
    max-lsa 12000<br>
 </details>
+<details>
+<summary> Leaf-3 </summary>
+<br>
+Leaf-3#sh run<br>
+! Command: show running-config<br>
+! device: Leaf-3 (vEOS-lab, EOS-4.29.2F)<br>
+!<br>
+! boot system flash:/vEOS-lab.swi<br>
+!<br>
+no aaa root<br>
+!<br>
+transceiver qsfp default-mode 4x10G<br>
+!<br>
+service routing protocols model multi-agent<br>
+!<br>
+hostname Leaf-3<br>
+!<br>
+spanning-tree mode mstp<br>
+!<br>
+vlan 10<br>
+   name Test<br>
+!<br>
+interface Ethernet1<br>
+   description Spine-1 | Eth1<br>
+   mtu 9214<br>
+   no switchport<br>
+   ip address 10.4.1.5/31<br>
+   ip ospf network point-to-point<br>
+   ip ospf area 0.0.0.0<br>
+!<br>
+interface Ethernet2<br>
+   description Spine-2 | Eth1<br>
+   mtu 9214<br>
+   no switchport<br>
+   ip address 10.4.2.5/31<br>
+   ip ospf network point-to-point<br>
+   ip ospf area 0.0.0.0<br>
+!<br>
+interface Loopback1<br>
+   description Underlay<br>
+   ip address 10.0.0.3/32<br>
+   ip ospf area 0.0.0.0<br>
+!<br>
+interface Loopback2<br>
+   description Overlay<br>
+   ip address 10.2.0.3/32<br>
+   ip ospf area 0.0.0.0<br>
+!<br>
+interface Vxlan1<br>
+   vxlan source-interface Loopback2<br>
+   vxlan udp-port 4789<br>
+   vxlan vlan 10 vni 1010<br>
+   vxlan learn-restrict any<br>
+!<br>
+ip routing<br>
+!<br>
+router bgp 65003<br>
+   neighbor evpn peer group<br>
+   neighbor evpn remote-as 65000<br>
+   neighbor evpn update-source Loopback2<br>
+   neighbor evpn ebgp-multihop 3<br>
+   neighbor evpn send-community extended<br>
+   neighbor 10.2.1.0 peer group evpn<br>
+   neighbor 10.2.2.0 peer group evpn<br>
+   !<br>
+   vlan 10<br>
+      rd 65003:1010<br>
+      route-target both 10:1010<br>
+      redistribute learned<br>
+   !<br>
+   address-family evpn<br>
+      neighbor evpn activate<br>
+   !<br>
+   address-family ipv4<br>
+      network 10.2.0.3/32<br>
+!<br>
+router ospf 1<br>
+   router-id 10.0.0.3<br>
+   auto-cost reference-bandwidth 10000<br>
+   passive-interface default<br>
+   no passive-interface Ethernet1<br>
+   no passive-interface Ethernet2<br>
+   network 0.0.0.0/0 area 0.0.0.0<br>
+   max-lsa 12000<br>
+</details>
