@@ -464,3 +464,306 @@ router ospf 1<br>
    network 0.0.0.0/0 area 0.0.0.0<br>
    max-lsa 12000<br>
 </details>
+</details>
+#### Диагностика Spine/Leaf
+
+<details>
+<summary> Spine-1 diag </summary>
+ 
+ ```
+Spine-1#sh bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.2.1.0, local AS number 65000
+Neighbor Status Codes: m - Under maintenance
+  Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.2.0.1 4 65001             42        43    0    0 00:23:47 Estab   2      2
+  10.2.0.2 4 65002             40        39    0    0 00:19:48 Estab   2      2
+  10.2.0.3 4 65003             40        36    0    0 00:19:37 Estab   3      3
+
+Spine-1#show bgp evpn 
+BGP routing table information for VRF default
+Router identifier 10.2.1.0, local AS number 65000
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 65001:1010 mac-ip 0050.7966.6806
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65002:1010 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65003:1010 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1010 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65001:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65002:1010 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65003:1010 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65003 i
+```
+</details>
+<details>
+<summary> Spine-2 diag </summary>
+
+ ```
+Spine-2#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.2.2.0, local AS number 65000
+Neighbor Status Codes: m - Under maintenance
+  Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.2.0.1 4 65001             50        47    0    0 00:26:07 Estab   2      2
+  10.2.0.2 4 65002             45        43    0    0 00:22:07 Estab   2      2
+  10.2.0.3 4 65003             44        39    0    0 00:22:04 Estab   3      3
+
+Spine-2#show bgp evpn 
+BGP routing table information for VRF default
+Router identifier 10.2.2.0, local AS number 65000
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 65001:1010 mac-ip 0050.7966.6806
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65002:1010 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65003:1010 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1010 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65001:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65002:1010 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65003:1010 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65003 i
+```
+</details>
+<details>
+<summary> Leaf-1 diag </summary>
+
+ ```
+Leaf-1# show bgp evpn summary 
+BGP summary information for VRF default
+Router identifier 10.2.0.1, local AS number 65001
+Neighbor Status Codes: m - Under maintenance
+  Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.2.1.0 4 65000             48        47    0    0 00:28:03 Estab   5      5
+  10.2.2.0 4 65000             48        53    0    0 00:28:03 Estab   5      5
+  
+Leaf-1# show bgp evpn 
+BGP routing table information for VRF default
+Router identifier 10.2.0.1, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 65001:1010 mac-ip 0050.7966.6806
+                                 -                     -       -       0       i
+ * >Ec    RD: 65002:1010 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1010 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >Ec    RD: 65003:1010 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1010 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >Ec    RD: 65003:1010 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1010 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >      RD: 65001:1010 imet 10.2.0.1
+                                 -                     -       -       0       i
+ * >Ec    RD: 65002:1010 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1010 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >Ec    RD: 65003:1010 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1010 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65000 65003 i  
+  
+Leaf-1# show interfaces vxlan 1 
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback2 and is active with 10.2.0.1
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+    [10, 1010]       
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is not configured
+  Headend replication flood vtep list is:
+    10 10.2.0.3        10.2.0.2       
+  Shared Router MAC is 0000.0000.0000
+
+Leaf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  10    0050.7966.6806    DYNAMIC     Et3        1       0:00:22 ago
+  10    0050.7966.6807    DYNAMIC     Vx1        1       0:00:07 ago
+  10    0050.7966.6808    DYNAMIC     Vx1        1       0:00:14 ago
+  10    0050.7966.6809    DYNAMIC     Vx1        1       0:00:22 ago
+Total Mac Addresses for this criterion: 4
+```
+</details>
+<summary> Leaf-2 diag </summary>
+
+ ```
+Leaf-2#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.2.0.2, local AS number 65002
+Neighbor Status Codes: m - Under maintenance
+  Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.2.1.0 4 65000             58        60    0    0 00:30:46 Estab   5      5
+  10.2.2.0 4 65000             58        61    0    0 00:30:46 Estab   5      5
+
+Leaf-2#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.2.0.2, local AS number 65002
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 65001:1010 mac-ip 0050.7966.6806
+                                 10.2.0.1              -       100     0       65000 65001 i
+ *  ec    RD: 65001:1010 mac-ip 0050.7966.6806
+                                 10.2.0.1              -       100     0       65000 65001 i
+ * >      RD: 65002:1010 mac-ip 0050.7966.6807
+                                 -                     -       -       0       i
+ * >Ec    RD: 65003:1010 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1010 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >Ec    RD: 65003:1010 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1010 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >Ec    RD: 65001:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65000 65001 i
+ *  ec    RD: 65001:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65000 65001 i
+ * >      RD: 65002:1010 imet 10.2.0.2
+                                 -                     -       -       0       i
+ * >Ec    RD: 65003:1010 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1010 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65000 65003 i
+
+Leaf-2#show interfaces vxlan 1 
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback2 and is active with 10.2.0.2
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+    [10, 1010]       
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is not configured
+  Headend replication flood vtep list is:
+    10 10.2.0.1        10.2.0.3       
+  Shared Router MAC is 0000.0000.0000
+
+Leaf-2#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  10    0050.7966.6806    DYNAMIC     Vx1        1       0:01:50 ago
+  10    0050.7966.6807    DYNAMIC     Et3        1       0:01:35 ago
+  10    0050.7966.6808    DYNAMIC     Vx1        1       0:01:42 ago
+  10    0050.7966.6809    DYNAMIC     Vx1        1       0:01:50 ago
+Total Mac Addresses for this criterion: 4
+```
+</details>
+<summary> Leaf-3 diag </summary>
+
+ ```
+Leaf-3# show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.2.0.3, local AS number 65003
+Neighbor Status Codes: m - Under maintenance
+  Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.2.1.0 4 65000             54        62    0    0 00:32:43 Estab   4      4
+  10.2.2.0 4 65000             54        63    0    0 00:32:51 Estab   4      4
+
+Leaf-3#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.2.0.3, local AS number 65003
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 65001:1010 mac-ip 0050.7966.6806
+                                 10.2.0.1              -       100     0       65000 65001 i
+ *  ec    RD: 65001:1010 mac-ip 0050.7966.6806
+                                 10.2.0.1              -       100     0       65000 65001 i
+ * >Ec    RD: 65002:1010 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1010 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >      RD: 65003:1010 mac-ip 0050.7966.6808
+                                 -                     -       -       0       i
+ * >      RD: 65003:1010 mac-ip 0050.7966.6809
+                                 -                     -       -       0       i
+ * >Ec    RD: 65001:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65000 65001 i
+ *  ec    RD: 65001:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65000 65001 i
+ * >Ec    RD: 65002:1010 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1010 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >      RD: 65003:1010 imet 10.2.0.3
+                                 -                     -       -       0       i
+
+Leaf-3#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback2 and is active with 10.2.0.3
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+    [10, 1010]       
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is not configured
+  Headend replication flood vtep list is:
+    10 10.2.0.1        10.2.0.2       
+  Shared Router MAC is 0000.0000.0000
+
+Leaf-3#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  10    0050.7966.6806    DYNAMIC     Vx1        1       0:04:15 ago
+  10    0050.7966.6807    DYNAMIC     Vx1        1       0:03:59 ago
+  10    0050.7966.6808    DYNAMIC     Et3        1       0:04:07 ago
+  10    0050.7966.6809    DYNAMIC     Et4        1       0:04:15 ago
+Total Mac Addresses for this criterion: 4
+```
+</details>
