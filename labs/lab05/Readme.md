@@ -773,3 +773,71 @@ Vlan    Mac Address       Type        Ports      Moves   Last Move
 Total Mac Addresses for this criterion: 4
 ```
 </details>
+<details>
+<summary> Client-1 diag </summary>
+ 
+ ```
+Cl-1> show ip
+
+NAME        : Cl-1[1]
+IP/MASK     : 192.168.1.1/24
+GATEWAY     : 255.255.255.0
+DNS         : 
+MAC         : 00:50:79:66:68:06
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+```
+</details>
+
+<details>
+<summary> Client-2 diag </summary>
+ 
+ ```
+Cl-2> show ip
+
+NAME        : Cl-2[1]
+IP/MASK     : 192.168.1.2/24
+GATEWAY     : 255.255.255.0
+DNS         : 
+MAC         : 00:50:79:66:68:07
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+```
+</details>
+
+<details>
+<summary> Client-3 diag </summary>
+ 
+ ```
+Cl-3> show ip
+
+NAME        : Cl-3[1]
+IP/MASK     : 192.168.1.3/24
+GATEWAY     : 255.255.255.0
+DNS         : 
+MAC         : 00:50:79:66:68:08
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+```
+</details>
+
+<details>
+<summary> Client-4 diag </summary>
+ 
+ ```
+Cl-4> show ip
+
+NAME        : Cl-4[1]
+IP/MASK     : 192.168.1.4/24
+GATEWAY     : 255.255.255.0
+DNS         : 
+MAC         : 00:50:79:66:68:09
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+```
+</details>
