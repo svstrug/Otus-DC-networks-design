@@ -505,6 +505,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
                                  10.2.0.3              -       100     0       65003 i
 ```
 </details>
+
 <details>
 <summary> Spine-2 diag </summary>
 
@@ -543,6 +544,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
                                  10.2.0.3              -       100     0       65003 i
 ```
 </details>
+
 <details>
 <summary> Leaf-1 diag </summary>
 
@@ -619,6 +621,8 @@ Vlan    Mac Address       Type        Ports      Moves   Last Move
 Total Mac Addresses for this criterion: 4
 ```
 </details>
+
+<details>
 <summary> Leaf-2 diag </summary>
 
  ```
@@ -694,6 +698,8 @@ Vlan    Mac Address       Type        Ports      Moves   Last Move
 Total Mac Addresses for this criterion: 4
 ```
 </details>
+
+<details>
 <summary> Leaf-3 diag </summary>
 
  ```
