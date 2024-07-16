@@ -7,7 +7,7 @@
 ![image](main_topology_lab06.png)
 
 ### Особенности настройки:
-На Leaf's на interface vlan назначен ip address virtual (VARP) и задан ip virtual-router mac-address 00:00:11:22:33:44.
+На Leaf's на interface vlan назначен ip address virtual (VARP) as the anycast gateway IP и задан ip virtual-router mac-address 00:00:11:22:33:44.
 
 ### IP план:
 Device|Interface|IP Address|Subnet Mask|Default GW
@@ -205,7 +205,7 @@ router ospf 1<br>
 <details>
 <summary> Leaf-1 </summary>
 <br>
-Leaf-1#sh run<br>
+Leaf-1# sh run<br>
 ! Command: show running-config<br>
 ! device: Leaf-1 (vEOS-lab, EOS-4.29.2F)<br>
 !<br>
@@ -262,6 +262,7 @@ interface Vlan10<br>
 interface Vxlan1<br>
    vxlan source-interface Loopback2<br>
    vxlan udp-port 4789<br>
+   vxlan vlan 10 vni 1010<br>
    vxlan vrf vrf-vxlan vni 50000<br>
    vxlan learn-restrict any<br>
 !<br>
@@ -304,4 +305,4 @@ router ospf 1<br>
    no passive-interface Ethernet2<br>
    network 0.0.0.0/0 area 0.0.0.0<br>
    max-lsa 12000<br>
-</details>
+</details><br>
