@@ -305,4 +305,109 @@ router ospf 1<br>
    no passive-interface Ethernet2<br>
    network 0.0.0.0/0 area 0.0.0.0<br>
    max-lsa 12000<br>
-</details><br>
+</details>
+<details>
+<summary> Leaf-2 </summary>
+<br>
+Leaf-2#sh run<br>
+! Command: show running-config<br>
+! device: Leaf-2 (vEOS-lab, EOS-4.29.2F)<br>
+!<br>
+! boot system flash:/vEOS-lab.swi<br>
+!<br>
+no aaa root<br>
+!<br>
+transceiver qsfp default-mode 4x10G<br>
+!<br>
+service routing protocols model multi-agent<br>
+!<br>
+hostname Leaf-2<br>
+!<br>
+spanning-tree mode mstp<br>
+!<br>
+vlan 11<br>
+   name Client-2<br>
+!<br>
+vrf instance vrf-vxlan<br>
+!<br>
+interface Ethernet1<br>
+   description Spine-1 | Eth2<br>
+   mtu 9214<br>
+   no switchport<br>
+   ip address 10.4.1.3/31<br>
+   ip ospf network point-to-point<br>
+   ip ospf area 0.0.0.0<br>
+!<br>
+interface Ethernet2<br>
+   description Spine-2 | Eth2<br>
+   mtu 9214<br>
+   no switchport<br>
+   ip address 10.4.2.3/31<br>
+   ip ospf network point-to-point<br>
+   ip ospf area 0.0.0.0<br>
+!<br>
+interface Ethernet3<br>
+   switchport access vlan 11<br>
+!<br>
+interface Loopback1<br>
+   description Underlay<br>
+   ip address 10.0.0.2/32<br>
+   ip ospf area 0.0.0.0<br>
+!<br>
+interface Loopback2<br>
+   description Overlay<br>
+   ip address 10.2.0.2/32<br>
+   ip ospf area 0.0.0.0<br>
+!<br>
+interface Vlan11<br>
+   vrf vrf-vxlan<br>
+   ip address virtual 192.168.11.254/24<br>
+!<br>
+interface Vxlan1<br>
+   vxlan source-interface Loopback2<br>
+   vxlan udp-port 4789<br>
+   vxlan vlan 11 vni 1011<br>
+   vxlan vrf vrf-vxlan vni 50000<br>
+   vxlan learn-restrict any<br>
+!<br>
+ip virtual-router mac-address 00:00:11:22:33:44<br>
+!<br>
+ip routing<br>
+ip routing vrf vrf-vxlan<br>
+!<br>
+router bgp 65002<br>
+   neighbor evpn peer group<br>
+   neighbor evpn remote-as 65000<br>
+   neighbor evpn update-source Loopback2<br>
+   neighbor evpn ebgp-multihop 3<br>
+   neighbor evpn send-community extended<br>
+   neighbor 10.2.1.0 peer group evpn<br>
+   neighbor 10.2.2.0 peer group evpn<br>
+   !<br>
+   vlan 11<br>
+      rd 65002:1011<br>
+      route-target both 10:1011<br>
+      route-target both 11:1011<br>
+      redistribute learned<br>
+   !<br>
+   address-family evpn<br>
+      neighbor evpn activate<br>
+   !<br>
+   address-family ipv4<br>
+      network 10.2.0.2/32<br>
+   !<br>
+   vrf vrf-vxlan<br>
+      rd 10.2.0.2:1<br>
+      route-target import evpn 1:50000<br>
+      route-target export evpn 1:50000<br>
+      redistribute connected<br>
+!<br>
+router ospf 1<br>
+   router-id 10.0.0.2<br>
+   auto-cost reference-bandwidth 10000<br>
+   passive-interface default<br>
+   no passive-interface Ethernet1<br>
+   no passive-interface Ethernet2<br>
+   network 0.0.0.0/0 area 0.0.0.0<br>
+   max-lsa 12000<br>
+</details>
