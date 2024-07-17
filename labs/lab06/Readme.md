@@ -1167,3 +1167,52 @@ Cl-4> show arp
 
 ```
 </details>
+#### Проверка наличия IP связности между всеми устройствами через L3 VNI.
+
+<details>
+ 
+```
+Cl-1> ping 192.168.11.2
+
+84 bytes from 192.168.11.2 icmp_seq=1 ttl=62 time=159.884 ms
+84 bytes from 192.168.11.2 icmp_seq=2 ttl=62 time=19.282 ms
+84 bytes from 192.168.11.2 icmp_seq=3 ttl=62 time=18.301 ms
+84 bytes from 192.168.11.2 icmp_seq=4 ttl=62 time=17.062 ms
+84 bytes from 192.168.11.2 icmp_seq=5 ttl=62 time=16.585 ms
+
+Cl-1> trace 192.168.11.2
+trace to 192.168.11.2, 8 hops max, press Ctrl+C to stop
+ 1   192.168.10.254   3.999 ms  3.884 ms  4.587 ms
+ 2   192.168.11.254   18.983 ms  16.301 ms  12.055 ms
+ 3   *192.168.11.2   28.450 ms (ICMP type:3, code:3, Destination port unreachable)
+
+Cl-1> ping 192.168.12.3
+
+84 bytes from 192.168.12.3 icmp_seq=1 ttl=62 time=89.850 ms
+84 bytes from 192.168.12.3 icmp_seq=2 ttl=62 time=20.122 ms
+84 bytes from 192.168.12.3 icmp_seq=3 ttl=62 time=18.060 ms
+84 bytes from 192.168.12.3 icmp_seq=4 ttl=62 time=17.347 ms
+84 bytes from 192.168.12.3 icmp_seq=5 ttl=62 time=15.892 ms
+
+Cl-1> trace 192.168.12.3
+trace to 192.168.12.3, 8 hops max, press Ctrl+C to stop
+ 1   192.168.10.254   8.016 ms  2.823 ms  2.985 ms
+ 2   192.168.12.254   15.937 ms  12.836 ms  13.793 ms
+ 3   *192.168.12.3   15.703 ms (ICMP type:3, code:3, Destination port unreachable)
+
+Cl-1> ping 192.168.13.4
+
+84 bytes from 192.168.13.4 icmp_seq=1 ttl=62 time=81.277 ms
+84 bytes from 192.168.13.4 icmp_seq=2 ttl=62 time=20.235 ms
+84 bytes from 192.168.13.4 icmp_seq=3 ttl=62 time=19.461 ms
+84 bytes from 192.168.13.4 icmp_seq=4 ttl=62 time=68.430 ms
+84 bytes from 192.168.13.4 icmp_seq=5 ttl=62 time=23.208 ms
+
+Cl-1> trace 192.168.13.4
+trace to 192.168.13.4, 8 hops max, press Ctrl+C to stop
+ 1   192.168.10.254   4.203 ms  3.562 ms  2.960 ms
+ 2   192.168.12.254   14.390 ms  12.989 ms  13.553 ms
+ 3   *192.168.13.4   68.109 ms (ICMP type:3, code:3, Destination port unreachable)
+
+```
+</details>
