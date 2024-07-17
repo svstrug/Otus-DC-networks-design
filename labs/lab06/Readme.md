@@ -530,3 +530,120 @@ router ospf 1<br>
    network 0.0.0.0/0 area 0.0.0.0<br>
    max-lsa 12000<br>
 </details>
+#### Диагностика Spine/Leaf
+
+<details>
+<summary> Spine-1 diag </summary>
+ 
+ ```
+Spine-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.2.1.0, local AS number 65000
+Neighbor Status Codes: m - Under maintenance
+  Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.2.0.1 4 65001           3800      3758    0    0    2d03h Estab   4      4
+  10.2.0.2 4 65002           3798      3756    0    0    2d03h Estab   4      4
+  10.2.0.3 4 65003           3798      3754    0    0    2d03h Estab   8      8
+
+Spine-1#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.2.1.0, local AS number 65000
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 65001:1010 mac-ip 0050.7966.6806
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65001:1010 mac-ip 0050.7966.6806 192.168.10.1
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65002:1011 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65002:1011 mac-ip 0050.7966.6807 192.168.11.2
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65003:1012 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1012 mac-ip 0050.7966.6808 192.168.12.3
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1013 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1013 mac-ip 0050.7966.6809 192.168.13.4
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65001:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65002:1011 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65003:1012 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1013 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 10.2.0.1:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 10.2.0.2:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 10.2.0.3:1 ip-prefix 192.168.12.0/24
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 10.2.0.3:1 ip-prefix 192.168.13.0/24
+                                 10.2.0.3              -       100     0       65003 i
+
+```
+</details>
+
+<details>
+<summary> Spine-2 diag </summary>
+
+ ```
+Spine-2#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.2.2.0, local AS number 65000
+Neighbor Status Codes: m - Under maintenance
+  Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.2.0.1 4 65001           3806      3759    0    0    2d03h Estab   4      4
+  10.2.0.2 4 65002           3800      3766    0    0    2d03h Estab   4      4
+  10.2.0.3 4 65003           3802      3751    0    0    2d03h Estab   8      8
+
+Spine-2#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.2.2.0, local AS number 65000
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 65001:1010 mac-ip 0050.7966.6806
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65001:1010 mac-ip 0050.7966.6806 192.168.10.1
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65002:1011 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65002:1011 mac-ip 0050.7966.6807 192.168.11.2
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65003:1012 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1012 mac-ip 0050.7966.6808 192.168.12.3
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1013 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1013 mac-ip 0050.7966.6809 192.168.13.4
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65001:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 65002:1011 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 65003:1012 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 65003:1013 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 10.2.0.1:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.1              -       100     0       65001 i
+ * >      RD: 10.2.0.2:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.2              -       100     0       65002 i
+ * >      RD: 10.2.0.3:1 ip-prefix 192.168.12.0/24
+                                 10.2.0.3              -       100     0       65003 i
+ * >      RD: 10.2.0.3:1 ip-prefix 192.168.13.0/24
+                                 10.2.0.3              -       100     0       65003 i
+
+```
+</details>
