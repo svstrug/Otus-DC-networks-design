@@ -1080,3 +1080,90 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
 ```
 </details>
+<details>
+<summary> Client-1 diag </summary>
+ 
+ ```
+Cl-1> show ip
+
+NAME        : Cl-1[1]
+IP/MASK     : 192.168.10.1/24
+GATEWAY     : 192.168.10.254
+DNS         :
+MAC         : 00:50:79:66:68:06
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+Cl-1> show arp
+
+00:00:11:22:33:44  192.168.10.254 expires in 102 seconds
+
+```
+</details>
+
+<details>
+<summary> Client-2 diag </summary>
+ 
+ ```
+Cl-2> show ip
+
+NAME        : Cl-2[1]
+IP/MASK     : 192.168.11.2/24
+GATEWAY     : 192.168.11.254
+DNS         :
+MAC         : 00:50:79:66:68:07
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+Cl-2> show arp
+
+00:00:11:22:33:44  192.168.11.254 expires in 107 seconds
+
+```
+</details>
+
+<details>
+<summary> Client-3 diag </summary>
+ 
+ ```
+Cl-3> show ip
+
+NAME        : Cl-3[1]
+IP/MASK     : 192.168.12.3/24
+GATEWAY     : 192.168.12.254
+DNS         :
+MAC         : 00:50:79:66:68:08
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+Cl-3> show arp
+
+00:00:11:22:33:44  192.168.12.254 expires in 113 seconds
+
+```
+</details>
+
+<details>
+<summary> Client-4 diag </summary>
+ 
+ ```
+Cl-4> show ip
+
+NAME        : Cl-4[1]
+IP/MASK     : 192.168.13.4/24
+GATEWAY     : 192.168.13.254
+DNS         :
+MAC         : 00:50:79:66:68:09
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+Cl-4> show arp
+
+00:00:11:22:33:44  192.168.13.254 expires in 108 seconds
+
+```
+</details>
