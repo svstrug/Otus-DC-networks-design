@@ -647,3 +647,159 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
 ```
 </details>
+<details>
+<summary> Leaf-1 diag </summary>
+
+ ```
+Leaf-1#show ip route vrf vrf-vxlan
+
+VRF: vrf-vxlan
+Codes: C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ C        192.168.10.0/24 is directly connected, Vlan10
+ B E      192.168.11.2/32 [200/0] via VTEP 10.2.0.2 VNI 50000 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      192.168.11.0/24 [200/0] via VTEP 10.2.0.2 VNI 50000 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      192.168.12.3/32 [200/0] via VTEP 10.2.0.3 VNI 50000 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      192.168.12.0/24 [200/0] via VTEP 10.2.0.3 VNI 50000 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      192.168.13.4/32 [200/0] via VTEP 10.2.0.3 VNI 50000 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      192.168.13.0/24 [200/0] via VTEP 10.2.0.3 VNI 50000 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+
+Leaf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+   1    0000.1122.3344    STATIC      Cpu
+  10    0000.1122.3344    STATIC      Cpu
+  10    0050.7966.6806    DYNAMIC     Et3        1       0:01:34 ago
+4094    0000.1122.3344    STATIC      Cpu
+4094    5000.0003.3766    DYNAMIC     Vx1        1       17:12:45 ago
+4094    5000.0015.f4e8    DYNAMIC     Vx1        1       17:06:45 ago
+Total Mac Addresses for this criterion: 6
+
+Leaf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+4094  5000.0003.3766  EVPN      Vx1  10.2.0.2         1       17:29:39 ago
+4094  5000.0015.f4e8  EVPN      Vx1  10.2.0.3         1       17:23:38 ago
+Total Remote Mac Addresses for this criterion: 2
+
+Leaf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP           Tunnel Type(s)
+-------------- --------------
+10.2.0.2       unicast
+10.2.0.3       unicast
+
+Total number of remote VTEPS:  2
+
+Leaf-1#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback2 and is active with 10.2.0.1
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is
+    [10, 1010]
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4094, 50000]
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is
+   [vrf-vxlan, 50000]
+  Shared Router MAC is 0000.0000.0000
+
+Leaf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.2.0.1, local AS number 65001
+Neighbor Status Codes: m - Under maintenance
+  Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.2.1.0 4 65000           3776      3819    0    0    2d04h Estab   12     12
+  10.2.2.0 4 65000           3774      3825    0    0    2d04h Estab   12     12
+
+Leaf-1#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.2.0.1, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 65001:1010 mac-ip 0050.7966.6806
+                                 -                     -       -       0       i
+ * >      RD: 65001:1010 mac-ip 0050.7966.6806 192.168.10.1
+                                 -                     -       -       0       i
+ * >Ec    RD: 65002:1011 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1011 mac-ip 0050.7966.6807
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >Ec    RD: 65002:1011 mac-ip 0050.7966.6807 192.168.11.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1011 mac-ip 0050.7966.6807 192.168.11.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >Ec    RD: 65003:1012 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1012 mac-ip 0050.7966.6808
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >Ec    RD: 65003:1012 mac-ip 0050.7966.6808 192.168.12.3
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1012 mac-ip 0050.7966.6808 192.168.12.3
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >Ec    RD: 65003:1013 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1013 mac-ip 0050.7966.6809
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >Ec    RD: 65003:1013 mac-ip 0050.7966.6809 192.168.13.4
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1013 mac-ip 0050.7966.6809 192.168.13.4
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >      RD: 65001:1010 imet 10.2.0.1
+                                 -                     -       -       0       i
+ * >Ec    RD: 65002:1011 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1011 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >Ec    RD: 65003:1012 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1012 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >Ec    RD: 65003:1013 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *  ec    RD: 65003:1013 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >      RD: 10.2.0.1:1 ip-prefix 192.168.10.0/24
+                                 -                     -       -       0       i
+ * >      RD: 10.2.0.2:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *        RD: 10.2.0.2:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >      RD: 10.2.0.3:1 ip-prefix 192.168.12.0/24
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *        RD: 10.2.0.3:1 ip-prefix 192.168.12.0/24
+                                 10.2.0.3              -       100     0       65000 65003 i
+ * >      RD: 10.2.0.3:1 ip-prefix 192.168.13.0/24
+                                 10.2.0.3              -       100     0       65000 65003 i
+ *        RD: 10.2.0.3:1 ip-prefix 192.168.13.0/24
+                                 10.2.0.3              -       100     0       65000 65003 i
+```
+</details>
