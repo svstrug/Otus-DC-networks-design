@@ -610,3 +610,118 @@ router ospf 1<br>
    network 0.0.0.0/0 area 0.0.0.0<br>
    max-lsa 12000<br>
 </details>
+#### Диагностика c Leaf все dual homed линки Client-1 и Client-2 в работе 
+
+<details>
+<summary> Leaf-1 diag </summary>
+ 
+ ```
+Leaf-1#show bgp evpn instance vlan 10
+EVPN instance: VLAN 10
+  Route distinguisher: 65001:1010
+  Route target import: Route-Target-AS:10:1010
+  Route target export: Route-Target-AS:10:1010
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.2.0.1
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 00cc:cccc:cccc:cccc:cccc
+      Interface: Port-Channel1
+      Mode: all-active
+      State: up
+      ES-Import RT: cc:cc:cc:cc:cc:cc
+      DF election algorithm: modulus
+      Designated forwarder: 10.2.0.1
+      Non-Designated forwarder: 10.2.0.2
+	  
+Leaf-1#show bgp evpn instance vlan 11
+EVPN instance: VLAN 11
+  Route distinguisher: 65001:1011
+  Route target import: Route-Target-AS:11:1011
+  Route target export: Route-Target-AS:11:1011
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.2.0.1
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 00dd:dddd:dddd:dddd:dddd
+      Interface: Port-Channel2
+      Mode: all-active
+      State: up
+      ES-Import RT: dd:dd:dd:dd:dd:dd
+      DF election algorithm: modulus
+      Designated forwarder: 10.2.0.2
+      Non-Designated forwarder: 10.2.0.1
+    ESI: 00cc:cccc:cccc:cccc:cccc
+      Interface: Port-Channel1
+      Mode: all-active
+      State: up
+      ES-Import RT: cc:cc:cc:cc:cc:cc
+      DF election algorithm: modulus
+      Designated forwarder: 10.2.0.2
+      Non-Designated forwarder: 10.2.0.1
+	  
+Leaf-1#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.2.0.1, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 65001:1010 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 -                     -       -       0       i
+ * >      RD: 65001:1011 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 -                     -       -       0       i
+ * >Ec    RD: 65002:1010 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1010 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >Ec    RD: 65002:1011 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1011 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >      RD: 10.2.0.1:1 auto-discovery 00cc:cccc:cccc:cccc:cccc
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.2.0.2:1 auto-discovery 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 10.2.0.2:1 auto-discovery 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >      RD: 65001:1011 auto-discovery 0 00dd:dddd:dddd:dddd:dddd
+                                 -                     -       -       0       i
+ * >Ec    RD: 65002:1011 auto-discovery 0 00dd:dddd:dddd:dddd:dddd
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 65002:1011 auto-discovery 0 00dd:dddd:dddd:dddd:dddd
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >      RD: 10.2.0.1:1 auto-discovery 00dd:dddd:dddd:dddd:dddd
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.2.0.2:1 auto-discovery 00dd:dddd:dddd:dddd:dddd
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 10.2.0.2:1 auto-discovery 00dd:dddd:dddd:dddd:dddd
+                                 10.2.0.2              -       100     0       65000 65002 i
+
+Leaf-1#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.2.0.1, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.2.0.1:1 ethernet-segment 00cc:cccc:cccc:cccc:cccc 10.2.0.1
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.2.0.2:1 ethernet-segment 00cc:cccc:cccc:cccc:cccc 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 10.2.0.2:1 ethernet-segment 00cc:cccc:cccc:cccc:cccc 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ * >      RD: 10.2.0.1:1 ethernet-segment 00dd:dddd:dddd:dddd:dddd 10.2.0.1
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.2.0.2:1 ethernet-segment 00dd:dddd:dddd:dddd:dddd 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+ *  ec    RD: 10.2.0.2:1 ethernet-segment 00dd:dddd:dddd:dddd:dddd 10.2.0.2
+                                 10.2.0.2              -       100     0       65000 65002 i
+```
+</details>
