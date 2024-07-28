@@ -921,7 +921,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 ```
 </details>
 
-### Проверка наличия IP связности у клиентов:
+#### Проверка наличия IP связности у клиентов:
 
 <details>
 <summary> Client-1 diag </summary>
@@ -1250,6 +1250,9 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
                                  10.2.0.2              -       100     0       65000 65002 i
 ```
 </details>
+
+#### Проверка наличия IP связности у клиентов:
+
 <details>
 <summary> Client-1 diag </summary>
  
