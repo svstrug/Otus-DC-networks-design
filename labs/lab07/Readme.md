@@ -16,6 +16,9 @@ Client-3 и Client-4 имеют single homed подключения в vlan 12 �
 Spine/Leaf - Arista, Clients - Cumulus linux.
 
 ### IP план:
+
+<details>
+
 Device|Interface|IP Address|Subnet Mask|Default GW
 ---|---|---|---|---
 Spine-1|Lo1|10.0.1.0|255.255.255.255
@@ -51,6 +54,8 @@ Client-1|bond1.10|192.168.10.1|255.255.255.0|192.168.10.254
 Client-2|bond1|192.168.11.2|255.255.255.0|192.168.11.254
 Client-3|swp1|192.168.12.1|255.255.255.0|192.168.12.254
 Client-4|swp1|192.168.13.1|255.255.255.0|192.168.13.254
+
+</details>
 
 #### Конфигурация на оборудовании Arista.
 <details>
