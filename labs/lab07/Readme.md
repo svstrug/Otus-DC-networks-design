@@ -1017,7 +1017,7 @@ rtt min/avg/max/mdev = 21.271/23.212/29.556/3.182 ms
 #### Диагностика c Leaf резервные линки Client-1 и Client-2 выключены в целях имитации отказа<br>
 Leaf-1 interface eth4 shutdown<br> 
 Leaf-2 interface eth3 shutdown<br> 
-
+<br>
 <details>
 <summary> Leaf-1 diag </summary>
  
