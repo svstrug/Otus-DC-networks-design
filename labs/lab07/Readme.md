@@ -1015,8 +1015,8 @@ rtt min/avg/max/mdev = 21.271/23.212/29.556/3.182 ms
 ```
 </details>
 #### Диагностика c Leaf резервные линки Client-1 и Client-2 выключены в целях имитации отказа
-Leaf-1 interface eth4 shutdown 
-Leaf-2 interface eth3 shutdown 
+####Leaf-1 interface eth4 shutdown 
+####Leaf-2 interface eth3 shutdown 
 
 <details>
 <summary> Leaf-1 diag </summary>
@@ -1250,13 +1250,93 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 <summary> Client-1 diag </summary>
  
  ```
+cumulus@client-1:~$ ping -c 5 192.168.11.2
+PING 192.168.11.2 (192.168.11.2) 56(84) bytes of data.
+64 bytes from 192.168.11.2: icmp_seq=1 ttl=64 time=20.2 ms
+64 bytes from 192.168.11.2: icmp_seq=2 ttl=64 time=17.3 ms
+64 bytes from 192.168.11.2: icmp_seq=3 ttl=64 time=22.5 ms
+64 bytes from 192.168.11.2: icmp_seq=4 ttl=64 time=20.1 ms
+64 bytes from 192.168.11.2: icmp_seq=5 ttl=64 time=19.6 ms
 
+--- 192.168.11.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 17.316/19.961/22.510/1.664 ms
+
+cumulus@client-1:~$ ping -c 5 192.168.12.1
+PING 192.168.12.1 (192.168.12.1) 56(84) bytes of data.
+64 bytes from 192.168.12.1: icmp_seq=1 ttl=62 time=24.2 ms
+64 bytes from 192.168.12.1: icmp_seq=2 ttl=62 time=20.2 ms
+64 bytes from 192.168.12.1: icmp_seq=3 ttl=62 time=21.8 ms
+64 bytes from 192.168.12.1: icmp_seq=4 ttl=62 time=20.3 ms
+64 bytes from 192.168.12.1: icmp_seq=5 ttl=62 time=23.4 ms
+
+--- 192.168.12.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 20.227/22.022/24.286/1.629 ms
+
+cumulus@client-1:~$ ping -c 5 192.168.13.1
+PING 192.168.13.1 (192.168.13.1) 56(84) bytes of data.
+64 bytes from 192.168.13.1: icmp_seq=1 ttl=62 time=22.7 ms
+64 bytes from 192.168.13.1: icmp_seq=2 ttl=62 time=18.0 ms
+64 bytes from 192.168.13.1: icmp_seq=3 ttl=62 time=37.7 ms
+64 bytes from 192.168.13.1: icmp_seq=4 ttl=62 time=22.6 ms
+64 bytes from 192.168.13.1: icmp_seq=5 ttl=62 time=22.6 ms
+
+--- 192.168.13.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 18.082/24.771/37.765/6.736 ms
 ```
 </details>
 <details>
 <summary> Client-2 diag </summary>
  
  ```
+cumulus@client-2:~$ ping -c 5 192.168.10.1
+PING 192.168.10.1 (192.168.10.1) 56(84) bytes of data.
+64 bytes from 192.168.10.1: icmp_seq=1 ttl=64 time=21.7 ms
+64 bytes from 192.168.10.1: icmp_seq=2 ttl=64 time=18.7 ms
+64 bytes from 192.168.10.1: icmp_seq=3 ttl=64 time=22.7 ms
+64 bytes from 192.168.10.1: icmp_seq=4 ttl=64 time=17.8 ms
+64 bytes from 192.168.10.1: icmp_seq=5 ttl=64 time=18.6 ms
 
+--- 192.168.10.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 17.885/19.953/22.735/1.902 ms
+
+cumulus@client-2:~$ ping -c 5 192.168.11.1
+PING 192.168.11.1 (192.168.11.1) 56(84) bytes of data.
+64 bytes from 192.168.11.1: icmp_seq=1 ttl=64 time=17.9 ms
+64 bytes from 192.168.11.1: icmp_seq=2 ttl=64 time=22.2 ms
+64 bytes from 192.168.11.1: icmp_seq=3 ttl=64 time=21.1 ms
+64 bytes from 192.168.11.1: icmp_seq=4 ttl=64 time=23.9 ms
+64 bytes from 192.168.11.1: icmp_seq=5 ttl=64 time=22.5 ms
+
+--- 192.168.11.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 17.969/21.573/23.957/2.013 ms
+
+cumulus@client-2:~$ ping -c 5 192.168.12.1
+PING 192.168.12.1 (192.168.12.1) 56(84) bytes of data.
+64 bytes from 192.168.12.1: icmp_seq=1 ttl=62 time=21.8 ms
+64 bytes from 192.168.12.1: icmp_seq=2 ttl=62 time=20.6 ms
+64 bytes from 192.168.12.1: icmp_seq=3 ttl=62 time=20.3 ms
+64 bytes from 192.168.12.1: icmp_seq=4 ttl=62 time=19.6 ms
+64 bytes from 192.168.12.1: icmp_seq=5 ttl=62 time=23.7 ms
+
+--- 192.168.12.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 19.604/21.219/23.733/1.453 ms
+
+cumulus@client-2:~$ ping -c 5 192.168.13.1
+PING 192.168.13.1 (192.168.13.1) 56(84) bytes of data.
+64 bytes from 192.168.13.1: icmp_seq=1 ttl=62 time=21.6 ms
+64 bytes from 192.168.13.1: icmp_seq=2 ttl=62 time=19.8 ms
+64 bytes from 192.168.13.1: icmp_seq=3 ttl=62 time=22.2 ms
+64 bytes from 192.168.13.1: icmp_seq=4 ttl=62 time=20.6 ms
+64 bytes from 192.168.13.1: icmp_seq=5 ttl=62 time=17.5 ms
+
+--- 192.168.13.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 17.548/20.375/22.234/1.638 ms
 ```
 </details>
