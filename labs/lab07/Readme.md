@@ -610,8 +610,9 @@ router ospf 1<br>
    network 0.0.0.0/0 area 0.0.0.0<br>
    max-lsa 12000<br>
 </details>
+
 #### Диагностика c Leaf все dual homed линки Client-1 и Client-2 в работе 
-<br>
+
 <details>
 <summary> Leaf-1 diag </summary>
  
