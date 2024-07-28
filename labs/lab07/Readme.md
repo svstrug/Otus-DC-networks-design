@@ -542,14 +542,6 @@ interface Ethernet3<br>
 interface Ethernet4<br>
    switchport access vlan 13<br>
 !<br>
-interface Ethernet5<br>
-!<br>
-interface Ethernet6<br>
-!<br>
-interface Ethernet7<br>
-!<br>
-interface Ethernet8<br>
-!<br>
 interface Loopback1<br>
    description Underlay<br>
    ip address 10.0.0.3/32<br>
@@ -559,8 +551,6 @@ interface Loopback2<br>
    description Overlay<br>
    ip address 10.2.0.3/32<br>
    ip ospf area 0.0.0.0<br>
-!<br>
-interface Management1<br>
 !<br>
 interface Vlan12<br>
    vrf vrf-vxlan<br>
