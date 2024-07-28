@@ -1014,7 +1014,7 @@ PING 192.168.13.1 (192.168.13.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 21.271/23.212/29.556/3.182 ms
 ```
 </details>
-#### Диагностика c Leaf резервные линки Client-1 и Client-2 выключены в целях имитации отказа<br>
+### Диагностика c Leaf резервные линки Client-1 и Client-2 выключены в целях имитации отказа<br>
 Leaf-1 interface eth4 shutdown<br> 
 Leaf-2 interface eth3 shutdown<br> 
 <br>
