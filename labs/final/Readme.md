@@ -160,3 +160,69 @@ DCI архитектура - Multipod<br>
 На eBGP сессиях между POD включена BGP аутентификация.<br>
 На маршрутизаторах оператора настроены prefix list на import/export для контроля маршрутной информации между маршрутизаторами оператора и фабрикой.<br>
 
+<details>
+<summary> POD1-R1 </summary>
+ 
+ ```
+POD1-R1#show running-config 
+! Command: show running-config
+! device: POD1-R1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname POD1-R1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description POD1-Spine-1 | Eth6
+   no switchport
+   ip address 10.4.1.11/31
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   ip address 1.1.1.1/32
+!
+interface Management1
+!
+ip routing
+!
+ip prefix-list routed_net_PAK374_in seq 10 permit 192.168.10.0/24 le 32
+ip prefix-list routed_net_PAK374_in seq 20 permit 192.168.11.0/24 le 32
+ip prefix-list routed_net_PAK374_in seq 30 permit 192.168.111.0/24 le 32
+ip prefix-list routed_net_PAK374_in seq 40 permit 192.168.100.0/24 le 32
+ip prefix-list routed_net_PAK374_out seq 10 permit 1.1.1.1/32
+!
+router bgp 31133
+   router-id 1.1.1.1
+   neighbor 10.4.1.10 remote-as 65500
+   neighbor 10.4.1.10 description to_POD1-Spine-1
+   !
+   address-family ipv4
+      neighbor 10.4.1.10 activate
+      neighbor 10.4.1.10 prefix-list routed_net_PAK374_in in
+      neighbor 10.4.1.10 prefix-list routed_net_PAK374_out out
+      network 1.1.1.1/32
+!
+end
+```
+</details>
