@@ -27,6 +27,7 @@ DCI interconnection построен на Border Spine коммутаторах 
 ### План IP адресации:
 
 Device|Interface|IP|Address|Subnet|Mask|Default|GW|Device|Interface|IP|Address|Subnet|Mask|Default|GW
+---|---|---|---|---|---|---|---|---|---
 POD1-R-1|Lo1|1.1.1.1|255.255.255.255|POD2-R-1|Lo1|2.2.2.1|255.255.255.255|
 -|Eth1|10.4.1.11|255.255.255.254|-|Eth1|10.20.1.11|255.255.255.254|
 POD1-R-2|Lo1|1.1.1.2|255.255.255.255|POD2-R-2|Lo1|2.2.2.2|255.255.255.255|
