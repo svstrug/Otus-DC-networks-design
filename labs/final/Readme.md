@@ -1758,7 +1758,7 @@ interface Ethernet5
    no switchport
    ip address 10.4.1.9/31
    isis enable Underlay
-   no isis bfd
+   isis bfd
    isis network point-to-point
 !
 interface Ethernet6
@@ -1898,7 +1898,7 @@ interface Ethernet5
    no switchport
    ip address 10.4.2.9/31
    isis enable Underlay
-   no isis bfd
+   isis bfd
    isis network point-to-point
 !
 interface Ethernet6
