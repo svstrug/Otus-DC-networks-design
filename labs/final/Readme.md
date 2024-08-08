@@ -2921,6 +2921,55 @@ end
 
 ```
 </details>
+<details>
+<summary> POD2-VPC5-8 </summary>
+ 
+ ```
+P2VPC5> show ip
+
+NAME        : P2VPC5[1]
+IP/MASK     : 192.168.100.11/24
+GATEWAY     : 192.168.100.1
+DNS         :
+MAC         : 00:50:79:66:68:19
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+P2VPC6> show ip
+
+NAME        : P2VPC6[1]
+IP/MASK     : 192.168.12.3/24
+GATEWAY     : 255.255.255.0
+DNS         :
+MAC         : 00:50:79:66:68:1a
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+P2VPC7> show ip
+
+NAME        : P2VPC7[1]
+IP/MASK     : 192.168.111.11/24
+GATEWAY     : 192.168.111.1
+DNS         :
+MAC         : 00:50:79:66:68:1b
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+P2VPC8> show ip
+
+NAME        : P2VPC8[1]
+IP/MASK     : 192.168.12.4/24
+GATEWAY     : 255.255.255.0
+DNS         :
+MAC         : 00:50:79:66:68:1c
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+```
+</details>
 
 ### Диагностика оборудования:
 
