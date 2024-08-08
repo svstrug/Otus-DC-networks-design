@@ -3877,6 +3877,14 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 <summary> POD2-Spine-2 diag </summary>
  
  ```
+POD2-Spine-2#show bgp summary vrf vrf-vxlan
+BGP summary information for VRF vrf-vxlan
+Router identifier 10.20.2.10, local AS number 65501
+Neighbor            AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+---------- ----------- ------------- ----------------------- -------------- ---------- ----------
+10.20.2.11       31133 Established   IPv4 Unicast            Negotiated              1          1
+
+
 POD2-Spine-2#show bgp evpn summary
 BGP summary information for VRF default
 Router identifier 10.18.2.0, local AS number 65501
