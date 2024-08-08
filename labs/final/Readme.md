@@ -1684,7 +1684,7 @@ Vxlan1 is up, line protocol is up (connected)
 ```
 </details>
 <details>
-<summary> POD1-Spine-1 diag </summary>
+<summary> POD1-Leaf-1 diag </summary>
  
  ```
 POD1-Leaf-1#show bgp evpn summary
