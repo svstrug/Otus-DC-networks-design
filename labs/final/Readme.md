@@ -2555,6 +2555,199 @@ router isis Underlay
 end
 ```
 </details>
+<details>
+<summary> POD2-Leaf-4 </summary>
+ 
+ ```
+POD2-Leaf-4#show running-config
+! Command: show running-config
+! device: POD2-Leaf-4 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname POD2-Leaf-4
+!
+spanning-tree mode mstp
+!
+vlan 12
+   name Data374_1
+!
+vlan 13
+   name Data374_2
+!
+vlan 14
+   name Data374_3
+!
+vlan 15
+   name Data374_4
+!
+vlan 16
+   name Data374_5
+!
+vlan 17
+   name Data374_6
+!
+vlan 100
+   name POD1_Management
+!
+vlan 111
+   name POD1_Data538
+!
+vrf instance vrf-vxlan
+!
+interface Port-Channel4
+   switchport trunk allowed vlan 12-17,100,111
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 00bb:bbbb:bbbb:bbbb:bbbb
+      route-target import bb:bb:bb:bb:bb:bb
+   lacp system-id 2222.2222.3344
+!
+interface Ethernet1
+   description POD2-Spine-1 | Eth4
+   mtu 9000
+   no switchport
+   ip address 10.20.1.7/31
+   isis enable Underlay
+   isis network point-to-point
+!
+interface Ethernet2
+   description POD2-Spine-2 | Eth4
+   mtu 9000
+   no switchport
+   ip address 10.20.2.7/31
+   isis enable Underlay
+   isis network point-to-point
+!
+interface Ethernet3
+   description POD2-MngSW-2 | Eth1
+   channel-group 4 mode active
+   lacp timer fast
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   description underlay
+   ip address 10.16.0.4/32
+   isis enable Underlay
+   isis passive
+!
+interface Loopback2
+   description Overlay
+   ip address 10.18.0.4/32
+   isis enable Underlay
+   isis passive
+!
+interface Management1
+!
+interface Vlan100
+   vrf vrf-vxlan
+   ip address virtual 192.168.100.1/24
+!
+interface Vlan111
+   vrf vrf-vxlan
+   ip address virtual 192.168.111.1/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback2
+   vxlan udp-port 4789
+   vxlan vlan 12 vni 1012
+   vxlan vlan 13 vni 1013
+   vxlan vlan 14 vni 1014
+   vxlan vlan 15 vni 1015
+   vxlan vlan 16 vni 1016
+   vxlan vlan 17 vni 1017
+   vxlan vlan 100 vni 10100
+   vxlan vlan 111 vni 10111
+   vxlan vrf vrf-vxlan vni 50000
+   vxlan learn-restrict any
+!
+ip virtual-router mac-address 00:00:11:22:33:44
+!
+ip routing
+ip routing vrf vrf-vxlan
+!
+router bgp 65501
+   neighbor EVPN-OVERLAY peer group
+   neighbor EVPN-OVERLAY remote-as 65501
+   neighbor EVPN-OVERLAY update-source Loopback2
+   neighbor EVPN-OVERLAY send-community extended
+   neighbor 10.18.1.0 peer group EVPN-OVERLAY
+   neighbor 10.18.2.0 peer group EVPN-OVERLAY
+   !
+   vlan 100
+      rd 10.18.0.4:10100
+      route-target both 10100:10100
+      redistribute learned
+   !
+   vlan 11
+      rd 10.18.0.4:10111
+      route-target both 10111:10111
+      redistribute learned
+   !
+   vlan 12
+      rd 10.18.0.4:1012
+      route-target both 1012:1012
+      redistribute learned
+   !
+   vlan 13
+      rd 10.18.0.4:1013
+      route-target both 1013:1013
+      redistribute learned
+   !
+   vlan 14
+      rd 10.18.0.4:1014
+      route-target both 1014:1014
+      redistribute learned
+   !
+   vlan 15
+      rd 10.18.0.4:1015
+      route-target both 1015:1015
+      redistribute learned
+   !
+   vlan 16
+      rd 10.18.0.4:1016
+      route-target both 1016:1016
+      redistribute learned
+   !
+   vlan 17
+      rd 10.18.0.4:1017
+      route-target both 1017:1017
+      redistribute learned
+   !
+   address-family evpn
+      neighbor EVPN-OVERLAY activate
+   !
+   vrf vrf-vxlan
+      rd 10.18.0.4:1
+      route-target import evpn 1:50000
+      route-target export evpn 1:50000
+      redistribute connected
+!
+router isis Underlay
+   net 49.0052.0100.0000.0042.00
+   is-type level-1
+   !
+   address-family ipv4 unicast
+!
+end
+```
+</details>
 
 ### Диагностика оборудования:
 
