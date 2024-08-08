@@ -4679,17 +4679,9 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 ### Проверка IP связности:
 
 <details>
-<summary> POD1-VPC1 проверка маршрутизации через L3 VNI </summary>
+<summary> POD1-VPC1 проверка IP связности через L3 VNI </summary>
  
  ```
-P1VPC1> ping 192.168.11.11
-
-192.168.11.11 icmp_seq=1 timeout
-192.168.11.11 icmp_seq=2 timeout
-192.168.11.11 icmp_seq=3 timeout
-192.168.11.11 icmp_seq=4 timeout
-84 bytes from 192.168.11.11 icmp_seq=5 ttl=62 time=488.580 ms
-
 P1VPC1> ping 192.168.11.11
 
 84 bytes from 192.168.11.11 icmp_seq=1 ttl=62 time=73.887 ms
