@@ -1569,6 +1569,7 @@ MTU         : 1500
 
 <details>
 <summary> POD1-R1 diag </summary>
+ 
  ```
 POD1-R1#show bgp summary
 BGP summary information for VRF default
@@ -1600,7 +1601,6 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
  * >      192.168.100.3/32       10.4.1.10             -       -          -       -       65500 65501 i
  * >      192.168.100.11/32      10.4.1.10             -       -          -       -       65500 65501 i
  * >      192.168.111.0/24       10.4.1.10             -       -          -       -       65500 65501 i
-POD1-R1#
 
 POD1-R1#show bgp neighbors 10.4.1.10 advertised-routes
 BGP routing table information for VRF default
