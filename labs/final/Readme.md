@@ -2834,6 +2834,93 @@ ip route 0.0.0.0/0 192.168.100.1
 end
 ```
 </details>
+<details>
+<summary> POD2-MngSW-2 </summary>
+ 
+ ```
+POD2-MngSW-2#show running-config
+! Command: show running-config
+! device: POD2-MngSW-2 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname POD2-MngSW-2
+!
+spanning-tree mode mstp
+!
+vlan 12
+   name Data374_1
+!
+vlan 13
+   name Data374_2
+!
+vlan 14
+   name Data374_3
+!
+vlan 15
+   name Data374_4
+!
+vlan 16
+   name Data374_5
+!
+vlan 17
+   name Data374_6
+!
+vlan 100
+   name POD2_Management
+!
+vlan 111
+   name POD2_Data538
+!
+interface Port-Channel1
+   description POD2-Leaf-3-4
+   switchport trunk allowed vlan 12-17,100,111
+   switchport mode trunk
+!
+interface Ethernet1
+   description POD2-Leaf-3 | Eth3
+   channel-group 1 mode active
+   lacp timer fast
+!
+interface Ethernet2
+   description POD2-Leaf-4 | Eth3
+   channel-group 1 mode active
+   lacp timer fast
+!
+interface Ethernet3
+   switchport access vlan 111
+!
+interface Ethernet4
+   switchport access vlan 12
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Management1
+!
+interface Vlan100
+   description test_host_in_vlan_100
+   ip address 192.168.100.3/24
+!
+no ip routing
+!
+ip route 0.0.0.0/0 192.168.100.1
+!
+end
+
+```
+</details>
 
 ### Диагностика оборудования:
 
