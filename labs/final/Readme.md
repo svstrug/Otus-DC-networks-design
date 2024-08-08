@@ -3873,3 +3873,65 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
 ```
 </details>
+<details>
+<summary> POD2-Spine-2 diag </summary>
+ 
+ ```
+POD2-Spine-2#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.18.2.0, local AS number 65501
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor  V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  to_POD1-Spine-2          10.2.2.0  4 65500          14116     12430    0    0 23:14:06 Estab   88     88
+  Leaf's                   10.18.0.1 4 65501           7668     38434    0    0    2d12h Estab   21     21
+  Leaf's                   10.18.0.2 4 65501           7826     37451    0    0 23:10:56 Estab   19     19
+  Leaf's                   10.18.0.3 4 65501           7443     39286    0    0 23:10:12 Estab   19     19
+  Leaf's                   10.18.0.4 4 65501           7676     37828    0    0 23:09:20 Estab   19     19
+
+POD2-Spine-2#show ip route vrf vrf-vxlan
+VRF: vrf-vxlan
+Codes: C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      1.1.1.2/32 [200/0] via VTEP 10.2.2.0 VNI 50000 router-mac 50:00:00:cb:38:c2 local-interface Vxlan1
+ B E      2.2.2.2/32 [200/0] via 10.20.2.11, Ethernet6
+ B E      10.4.2.10/31 [200/0] via VTEP 10.2.2.0 VNI 50000 router-mac 50:00:00:cb:38:c2 local-interface Vxlan1
+ C        10.20.2.10/31 is directly connected, Ethernet6
+ B E      192.168.10.2/32 [200/0] via VTEP 10.2.0.2 VNI 50000 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+ B E      192.168.10.11/32 [200/0] via VTEP 10.2.0.2 VNI 50000 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+ B E      192.168.10.0/24 [200/0] via VTEP 10.2.0.3 VNI 50000 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      192.168.11.0/24 [200/0] via VTEP 10.2.0.3 VNI 50000 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B I      192.168.100.3/32 [200/0] via VTEP 10.18.0.4 VNI 50000 router-mac 50:00:00:af:d3:f6 local-interface Vxlan1
+ B I      192.168.100.11/32 [200/0] via VTEP 10.18.0.2 VNI 50000 router-mac 50:00:00:1b:5e:8d local-interface Vxlan1
+ B I      192.168.100.0/24 [200/0] via VTEP 10.18.0.4 VNI 50000 router-mac 50:00:00:af:d3:f6 local-interface Vxlan1
+ B I      192.168.111.0/24 [200/0] via VTEP 10.18.0.4 VNI 50000 router-mac 50:00:00:af:d3:f6 local-interface Vxlan1
+
+POD2-Spine-2#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback2 and is active with 10.18.2.0
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: CLI
+  Remote MAC learning is disabled
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4094, 50000]
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is
+   [vrf-vxlan, 50000]
+  Shared Router MAC is 0000.0000.0000
+```
+</details>
