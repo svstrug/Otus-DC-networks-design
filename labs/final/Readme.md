@@ -1564,6 +1564,73 @@ RHOST:PORT  : 127.0.0.1:30000
 MTU         : 1500
 ```
 </details>
+<details>
+<summary> POD2-R1 </summary>
+ 
+ ```
+POD2-R1#show running-config
+! Command: show running-config
+! device: POD2-R1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname POD2-R1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description POD2-Spine-1 | Eth6
+   no switchport
+   ip address 10.20.1.11/31
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   ip address 2.2.2.1/32
+!
+interface Management1
+!
+ip routing
+!
+ip prefix-list routed_net_PAK374_in seq 10 permit 192.168.10.0/24 le 32
+ip prefix-list routed_net_PAK374_in seq 20 permit 192.168.11.0/24 le 32
+ip prefix-list routed_net_PAK374_in seq 30 permit 192.168.111.0/24 le 32
+ip prefix-list routed_net_PAK374_in seq 40 permit 192.168.100.0/24 le 32
+ip prefix-list routed_net_PAK374_out seq 10 permit 2.2.2.1/32
+!
+router bgp 31133
+   router-id 2.2.2.1
+   neighbor 10.20.1.10 remote-as 65501
+   neighbor 10.20.1.10 description to_POD2-Spine-1
+   !
+   address-family ipv4
+      neighbor 10.20.1.10 activate
+      neighbor 10.20.1.10 prefix-list routed_net_PAK374_in in
+      neighbor 10.20.1.10 prefix-list routed_net_PAK374_out out
+      network 2.2.2.1/32
+!
+end
+
+```
+</details>
 
 ### Диагностика оборудования:
 
