@@ -1514,3 +1514,52 @@ ip route 0.0.0.0/0 192.168.10.1
 end
 ```
 </details>
+<details>
+<summary> POD1-VPC1-4 </summary>
+ 
+ ```
+P1VPC1> show ip
+
+NAME        : P1VPC1[1]
+IP/MASK     : 192.168.10.11/24
+GATEWAY     : 192.168.10.1
+DNS         : 
+MAC         : 00:50:79:66:68:15
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+P1VPC2> show ip 
+
+NAME        : P1VPC2[1]
+IP/MASK     : 192.168.12.1/24
+GATEWAY     : 255.255.255.0
+DNS         : 
+MAC         : 00:50:79:66:68:16
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+P1VPC3> show ip
+
+NAME        : P1VPC3[1]
+IP/MASK     : 192.168.11.11/24
+GATEWAY     : 192.168.11.1
+DNS         : 
+MAC         : 00:50:79:66:68:17
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+P1VPC4> show ip
+
+NAME        : P1VPC4[1]
+IP/MASK     : 192.168.12.2/24
+GATEWAY     : 255.255.255.0
+DNS         : 
+MAC         : 00:50:79:66:68:18
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+```
+</details>
