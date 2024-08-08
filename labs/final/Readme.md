@@ -1566,3 +1566,53 @@ MTU         : 1500
 </details>
 
 ### Диагностика оборудования:
+
+<details>
+<summary> POD1-R1 diag </summary>
+
+POD1-R1#show bgp summary
+BGP summary information for VRF default
+Router identifier 1.1.1.1, local AS number 31133
+Neighbor           AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+--------- ----------- ------------- ----------------------- -------------- ---------- ----------
+10.4.1.10       65500 Established   IPv4 Unicast            Negotiated              8          6
+
+POD1-R1#show bgp neighbors 10.4.1.10 received-routes
+BGP routing table information for VRF default
+Router identifier 1.1.1.1, local AS number 31133
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+          10.4.1.10/31           10.4.1.10             -       -          -       -       65500 i
+          10.20.1.10/31          10.4.1.10             -       -          -       -       65500 65501 i
+ * >      192.168.10.0/24        10.4.1.10             -       -          -       -       65500 i
+ * >      192.168.10.2/32        10.4.1.10             -       -          -       -       65500 i
+ * >      192.168.10.3/32        10.4.1.10             -       -          -       -       65500 i
+ * >      192.168.10.11/32       10.4.1.10             -       -          -       -       65500 i
+ * >      192.168.11.0/24        10.4.1.10             -       -          -       -       65500 i
+ * >      192.168.11.11/32       10.4.1.10             -       -          -       -       65500 i
+ * >      192.168.100.0/24       10.4.1.10             -       -          -       -       65500 65501 i
+ * >      192.168.100.3/32       10.4.1.10             -       -          -       -       65500 65501 i
+ * >      192.168.100.11/32      10.4.1.10             -       -          -       -       65500 65501 i
+ * >      192.168.111.0/24       10.4.1.10             -       -          -       -       65500 65501 i
+POD1-R1#
+
+POD1-R1#show bgp neighbors 10.4.1.10 advertised-routes
+BGP routing table information for VRF default
+Router identifier 1.1.1.1, local AS number 31133
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast, q - Queued for advertisement
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      1.1.1.1/32             10.4.1.11             -       -          -       -       31133 i
+
+</details>
