@@ -4746,8 +4746,6 @@ P1VPC1> ping 2.2.2.2
  ```
 P1VPC2> ping 192.168.12.2
 
-P1VPC2> ping 192.168.12.2
-
 84 bytes from 192.168.12.2 icmp_seq=1 ttl=64 time=211.492 ms
 84 bytes from 192.168.12.2 icmp_seq=2 ttl=64 time=254.252 ms
 84 bytes from 192.168.12.2 icmp_seq=3 ttl=64 time=168.911 ms
