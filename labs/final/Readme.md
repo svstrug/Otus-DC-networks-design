@@ -3950,3 +3950,727 @@ Vxlan1 is up, line protocol is up (connected)
   Shared Router MAC is 0000.0000.0000
 ```
 </details>
+<details>
+<summary> POD2-Leaf-4 diag </summary>
+ 
+ ```
+POD2-Leaf-4#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.18.0.4, local AS number 65501
+Neighbor Status Codes: m - Under maintenance
+  Neighbor  V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.18.1.0 4 65501          38305      7685    0    0 23:22:37 Estab   149    149
+  10.18.2.0 4 65501          37856      7703    0    0 23:22:37 Estab   149    149
+
+POD2-Leaf-4#show ip route vrf vrf-vxlan
+
+VRF: vrf-vxlan
+Codes: C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B I      1.1.1.1/32 [200/0] via VTEP 10.2.1.0 VNI 50000 router-mac 50:00:00:d7:ee:0b local-interface Vxlan1
+ B I      1.1.1.2/32 [200/0] via VTEP 10.2.2.0 VNI 50000 router-mac 50:00:00:cb:38:c2 local-interface Vxlan1
+ B I      2.2.2.1/32 [200/0] via VTEP 10.18.1.0 VNI 50000 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B I      2.2.2.2/32 [200/0] via VTEP 10.18.2.0 VNI 50000 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B I      10.4.1.10/31 [200/0] via VTEP 10.2.1.0 VNI 50000 router-mac 50:00:00:d7:ee:0b local-interface Vxlan1
+ B I      10.4.2.10/31 [200/0] via VTEP 10.2.2.0 VNI 50000 router-mac 50:00:00:cb:38:c2 local-interface Vxlan1
+ B I      10.20.1.10/31 [200/0] via VTEP 10.18.1.0 VNI 50000 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B I      10.20.2.10/31 [200/0] via VTEP 10.18.2.0 VNI 50000 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B I      192.168.10.2/32 [200/0] via VTEP 10.2.0.2 VNI 50000 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+ B I      192.168.10.11/32 [200/0] via VTEP 10.2.0.2 VNI 50000 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+ B I      192.168.10.0/24 [200/0] via VTEP 10.2.0.4 VNI 50000 router-mac 50:00:00:f6:ad:37 local-interface Vxlan1
+ B I      192.168.11.0/24 [200/0] via VTEP 10.2.0.4 VNI 50000 router-mac 50:00:00:f6:ad:37 local-interface Vxlan1
+ B I      192.168.100.11/32 [200/0] via VTEP 10.18.0.1 VNI 50000 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ C        192.168.100.0/24 is directly connected, Vlan100
+ C        192.168.111.0/24 is directly connected, Vlan111
+
+POD2-Leaf-4#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback2 and is active with 10.18.0.4
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is
+    [12, 1012]        [13, 1013]        [14, 1014]        [15, 1015]
+    [16, 1016]        [17, 1017]        [100, 10100]      [111, 10111]
+
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4094, 50000]
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is
+   [vrf-vxlan, 50000]
+  Headend replication flood vtep list is:
+    12 10.18.0.1       10.2.0.4        10.2.0.1        10.18.0.2       10.18.0.3
+       10.2.0.3        10.2.0.2
+    13 10.18.0.1       10.2.0.4        10.2.0.1        10.18.0.2       10.18.0.3
+       10.2.0.3        10.2.0.2
+    14 10.18.0.1       10.2.0.4        10.2.0.1        10.18.0.2       10.18.0.3
+       10.2.0.3        10.2.0.2
+    15 10.18.0.1       10.2.0.4        10.2.0.1        10.18.0.2       10.18.0.3
+       10.2.0.3        10.2.0.2
+    16 10.18.0.1       10.2.0.4        10.2.0.1        10.18.0.2       10.18.0.3
+       10.2.0.3        10.2.0.2
+    17 10.18.0.1       10.2.0.4        10.2.0.1        10.18.0.2       10.18.0.3
+       10.2.0.3        10.2.0.2
+   100 10.18.0.1       10.18.0.2       10.18.0.3
+  Shared Router MAC is 0000.0000.0000
+
+POD2-Leaf-4#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.18.0.4, local AS number 65501
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.18.0.1:1012 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1012 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1013 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1013 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1014 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1014 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1015 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1015 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1016 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1016 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1017 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1017 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:10100 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:10100 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1012 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1012 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1013 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1013 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1014 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1014 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1015 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1015 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1016 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1016 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1017 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1017 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:10100 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:10100 auto-discovery 0 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1 auto-discovery 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1 auto-discovery 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1 auto-discovery 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.2:1 auto-discovery 00aa:aaaa:aaaa:aaaa:aaaa
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.3:1012 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.3:1012 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.3:1013 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.3:1013 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.3:1014 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.3:1014 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.3:1015 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.3:1015 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.3:1016 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.3:1016 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.3:1017 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.3:1017 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.3:10100 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.3:10100 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.4:1012 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1013 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1014 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1015 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1016 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1017 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:10100 auto-discovery 0 00bb:bbbb:bbbb:bbbb:bbbb
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.18.0.3:1 auto-discovery 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.3:1 auto-discovery 00bb:bbbb:bbbb:bbbb:bbbb
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.4:1 auto-discovery 00bb:bbbb:bbbb:bbbb:bbbb
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.2.0.1:1010 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1010 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1011 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1011 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1012 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1012 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1013 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1013 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1014 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1014 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1015 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1015 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1016 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1016 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1017 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1017 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1010 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1010 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1011 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1011 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1012 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1012 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1013 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1013 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1014 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1014 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1015 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1015 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1016 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1016 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1017 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1017 auto-discovery 0 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1 auto-discovery 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1 auto-discovery 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1 auto-discovery 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1 auto-discovery 00cc:cccc:cccc:cccc:cccc
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1010 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1010 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1011 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1011 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1012 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1012 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1013 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1013 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1014 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1014 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1015 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1015 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1016 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1016 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1017 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1017 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1010 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1010 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1011 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1011 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1012 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1012 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1013 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1013 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1014 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1014 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1015 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1015 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1016 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1016 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1017 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1017 auto-discovery 0 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1 auto-discovery 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1 auto-discovery 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1 auto-discovery 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1 auto-discovery 00ee:eeee:eeee:eeee:eeee
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1010 mac-ip 0050.7966.6815
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1010 mac-ip 0050.7966.6815
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1010 mac-ip 0050.7966.6815 192.168.10.11
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1010 mac-ip 0050.7966.6815 192.168.10.11
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1010 mac-ip 0050.7966.6815 192.168.10.11
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1010 mac-ip 0050.7966.6815 192.168.10.11
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.18.0.1:10100 mac-ip 0050.7966.6819
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:10100 mac-ip 0050.7966.6819
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:10100 mac-ip 0050.7966.6819 192.168.100.11
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:10100 mac-ip 0050.7966.6819 192.168.100.11
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:10100 mac-ip 0050.7966.6819 192.168.100.11
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:10100 mac-ip 0050.7966.6819 192.168.100.11
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.2.0.1:1010 mac-ip 5000.0043.40cf
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1010 mac-ip 5000.0043.40cf
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1010 mac-ip 5000.0043.40cf 192.168.10.2
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1010 mac-ip 5000.0043.40cf 192.168.10.2
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1010 mac-ip 5000.0043.40cf 192.168.10.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1010 mac-ip 5000.0043.40cf 192.168.10.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.18.0.3:10100 mac-ip 5000.0068.a17f 192.168.100.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.3:10100 mac-ip 5000.0068.a17f 192.168.100.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.4:10100 mac-ip 5000.0068.a17f 192.168.100.3
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.18.0.1:10100 mac-ip 5000.00d5.e2ad
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:10100 mac-ip 5000.00d5.e2ad
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.2.0.1:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1010 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1011 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1011 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1012 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1012 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1013 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1013 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1014 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1014 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1015 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1015 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1016 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1016 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.1:1017 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1017 imet 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1010 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1010 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1011 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1011 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1012 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1012 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1013 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1013 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1014 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1014 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1015 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1015 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1016 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1016 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1017 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1017 imet 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1010 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1010 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1011 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1011 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1012 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1012 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1013 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1013 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1014 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1014 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1015 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1015 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1016 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1016 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1017 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1017 imet 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1010 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1010 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1011 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1011 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1012 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1012 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1013 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1013 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1014 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1014 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1015 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1015 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1016 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1016 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1017 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1017 imet 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ * >Ec    RD: 10.18.0.1:1012 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1012 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1013 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1013 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1014 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1014 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1015 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1015 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1016 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1016 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:1017 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1017 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.1:10100 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:10100 imet 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1012 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1012 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1013 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.2:1013 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.2:1014 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.2:1014 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.2:1015 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1015 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1016 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1016 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1017 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:1017 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:10100 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.2:10100 imet 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.3:1012 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.3:1012 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.3:1013 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.3:1013 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.3:1014 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.3:1014 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.3:1015 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.3:1015 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.3:1016 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.3:1016 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.3:1017 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.3:1017 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.3:10100 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.3:10100 imet 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ * >      RD: 10.18.0.4:1012 imet 10.18.0.4
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1013 imet 10.18.0.4
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1014 imet 10.18.0.4
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1015 imet 10.18.0.4
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1016 imet 10.18.0.4
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:1017 imet 10.18.0.4
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.4:10100 imet 10.18.0.4
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.18.0.1:1 ethernet-segment 00aa:aaaa:aaaa:aaaa:aaaa 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.1:1 ethernet-segment 00aa:aaaa:aaaa:aaaa:aaaa 10.18.0.1
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >Ec    RD: 10.18.0.2:1 ethernet-segment 00aa:aaaa:aaaa:aaaa:aaaa 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ *  ec    RD: 10.18.0.2:1 ethernet-segment 00aa:aaaa:aaaa:aaaa:aaaa 10.18.0.2
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ * >Ec    RD: 10.18.0.3:1 ethernet-segment 00bb:bbbb:bbbb:bbbb:bbbb 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *  ec    RD: 10.18.0.3:1 ethernet-segment 00bb:bbbb:bbbb:bbbb:bbbb 10.18.0.3
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.4:1 ethernet-segment 00bb:bbbb:bbbb:bbbb:bbbb 10.18.0.4
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.2.0.1:1 ethernet-segment 00cc:cccc:cccc:cccc:cccc 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ *  ec    RD: 10.2.0.1:1 ethernet-segment 00cc:cccc:cccc:cccc:cccc 10.2.0.1
+                                 10.2.0.1              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.2:1 ethernet-segment 00cc:cccc:cccc:cccc:cccc 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ *  ec    RD: 10.2.0.2:1 ethernet-segment 00cc:cccc:cccc:cccc:cccc 10.2.0.2
+                                 10.2.0.2              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.3:1 ethernet-segment 00ee:eeee:eeee:eeee:eeee 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ *  ec    RD: 10.2.0.3:1 ethernet-segment 00ee:eeee:eeee:eeee:eeee 10.2.0.3
+                                 10.2.0.3              -       100     0       65500 i
+ * >Ec    RD: 10.2.0.4:1 ethernet-segment 00ee:eeee:eeee:eeee:eeee 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ *  ec    RD: 10.2.0.4:1 ethernet-segment 00ee:eeee:eeee:eeee:eeee 10.2.0.4
+                                 10.2.0.4              -       100     0       65500 i
+ * >      RD: 10.2.1.0:1 ip-prefix 1.1.1.1/32
+                                 10.2.1.0              -       100     0       65500 31133 i
+ * >      RD: 10.2.2.0:1 ip-prefix 1.1.1.2/32
+                                 10.2.2.0              -       100     0       65500 31133 i
+ * >      RD: 10.18.1.0:1 ip-prefix 2.2.2.1/32
+                                 10.18.1.0             -       100     0       31133 i
+ * >      RD: 10.18.2.0:1 ip-prefix 2.2.2.2/32
+                                 10.18.2.0             -       100     0       31133 i
+ * >      RD: 10.2.1.0:1 ip-prefix 10.4.1.10/31
+                                 10.2.1.0              -       100     0       65500 i
+ * >      RD: 10.2.2.0:1 ip-prefix 10.4.2.10/31
+                                 10.2.2.0              -       100     0       65500 i
+ * >      RD: 10.18.1.0:1 ip-prefix 10.20.1.10/31
+                                 10.18.1.0             -       100     0       i
+ * >      RD: 10.18.2.0:1 ip-prefix 10.20.2.10/31
+                                 10.18.2.0             -       100     0       i
+ * >      RD: 10.2.0.1:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.1              -       100     0       65500 i
+ *        RD: 10.2.0.1:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.1              -       100     0       65500 i
+ * >      RD: 10.2.0.2:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.2              -       100     0       65500 i
+ *        RD: 10.2.0.2:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.2              -       100     0       65500 i
+ * >      RD: 10.2.0.3:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.3              -       100     0       65500 i
+ *        RD: 10.2.0.3:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.3              -       100     0       65500 i
+ * >      RD: 10.2.0.4:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.4              -       100     0       65500 i
+ *        RD: 10.2.0.4:1 ip-prefix 192.168.10.0/24
+                                 10.2.0.4              -       100     0       65500 i
+ * >      RD: 10.2.0.1:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.1              -       100     0       65500 i
+ *        RD: 10.2.0.1:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.1              -       100     0       65500 i
+ * >      RD: 10.2.0.2:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.2              -       100     0       65500 i
+ *        RD: 10.2.0.2:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.2              -       100     0       65500 i
+ * >      RD: 10.2.0.3:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.3              -       100     0       65500 i
+ *        RD: 10.2.0.3:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.3              -       100     0       65500 i
+ * >      RD: 10.2.0.4:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.4              -       100     0       65500 i
+ *        RD: 10.2.0.4:1 ip-prefix 192.168.11.0/24
+                                 10.2.0.4              -       100     0       65500 i
+ * >      RD: 10.18.0.1:1 ip-prefix 192.168.100.0/24
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *        RD: 10.18.0.1:1 ip-prefix 192.168.100.0/24
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.2:1 ip-prefix 192.168.100.0/24
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *        RD: 10.18.0.2:1 ip-prefix 192.168.100.0/24
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.3:1 ip-prefix 192.168.100.0/24
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *        RD: 10.18.0.3:1 ip-prefix 192.168.100.0/24
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.4:1 ip-prefix 192.168.100.0/24
+                                 -                     -       -       0       i
+ * >      RD: 10.18.0.1:1 ip-prefix 192.168.111.0/24
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.1.0
+ *        RD: 10.18.0.1:1 ip-prefix 192.168.111.0/24
+                                 10.18.0.1             -       100     0       i Or-ID: 10.18.0.1 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.2:1 ip-prefix 192.168.111.0/24
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.1.0
+ *        RD: 10.18.0.2:1 ip-prefix 192.168.111.0/24
+                                 10.18.0.2             -       100     0       i Or-ID: 10.18.0.2 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.3:1 ip-prefix 192.168.111.0/24
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.1.0
+ *        RD: 10.18.0.3:1 ip-prefix 192.168.111.0/24
+                                 10.18.0.3             -       100     0       i Or-ID: 10.18.0.3 C-LST: 10.18.2.0
+ * >      RD: 10.18.0.4:1 ip-prefix 192.168.111.0/24
+                                 -                     -       -       0       i
+```
+</details>
