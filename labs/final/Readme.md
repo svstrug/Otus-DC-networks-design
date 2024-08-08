@@ -4740,3 +4740,36 @@ P1VPC1> ping 2.2.2.2
 
 ```
 </details>
+<details>
+<summary> POD1-VPC2 проверка IP связности через L2 VNI </summary>
+ 
+ ```
+P1VPC2> ping 192.168.12.2
+
+P1VPC2> ping 192.168.12.2
+
+84 bytes from 192.168.12.2 icmp_seq=1 ttl=64 time=211.492 ms
+84 bytes from 192.168.12.2 icmp_seq=2 ttl=64 time=254.252 ms
+84 bytes from 192.168.12.2 icmp_seq=3 ttl=64 time=168.911 ms
+84 bytes from 192.168.12.2 icmp_seq=4 ttl=64 time=157.156 ms
+84 bytes from 192.168.12.2 icmp_seq=5 ttl=64 time=411.762 ms
+
+P1VPC2> ping 192.168.12.3
+
+84 bytes from 192.168.12.3 icmp_seq=1 ttl=64 time=140.050 ms
+84 bytes from 192.168.12.3 icmp_seq=2 ttl=64 time=131.177 ms
+84 bytes from 192.168.12.3 icmp_seq=3 ttl=64 time=60.412 ms
+84 bytes from 192.168.12.3 icmp_seq=4 ttl=64 time=93.030 ms
+84 bytes from 192.168.12.3 icmp_seq=5 ttl=64 time=158.931 ms
+
+
+P1VPC2> ping 192.168.12.4
+
+84 bytes from 192.168.12.4 icmp_seq=1 ttl=64 time=60.402 ms
+84 bytes from 192.168.12.4 icmp_seq=2 ttl=64 time=105.267 ms
+84 bytes from 192.168.12.4 icmp_seq=3 ttl=64 time=100.793 ms
+84 bytes from 192.168.12.4 icmp_seq=4 ttl=64 time=115.193 ms
+84 bytes from 192.168.12.4 icmp_seq=5 ttl=64 time=381.743 ms
+
+```
+</details>
