@@ -1837,6 +1837,146 @@ end
 
 ```
 </details>
+<details>
+<summary> POD2-Spine-2 </summary>
+ 
+ ```
+POD2-Spine-2#show run
+! Command: show running-config
+! device: POD2-Spine-2 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname POD2-Spine-2
+!
+spanning-tree mode mstp
+!
+vrf instance vrf-vxlan
+!
+interface Ethernet1
+   description POD2-Leaf-1 | Eth2
+   mtu 9000
+   no switchport
+   ip address 10.20.2.0/31
+   isis enable Underlay
+   isis network point-to-point
+!
+interface Ethernet2
+   description POD2-Leaf-2 | Eth2
+   mtu 9000
+   no switchport
+   ip address 10.20.2.2/31
+   isis enable Underlay
+   isis network point-to-point
+!
+interface Ethernet3
+   description POD2-Leaf-3 | Eth2
+   mtu 9000
+   no switchport
+   ip address 10.20.2.4/31
+   isis enable Underlay
+   isis network point-to-point
+!
+interface Ethernet4
+   description POD2-Leaf-4 | Eth2
+   mtu 9000
+   no switchport
+   ip address 10.20.2.6/31
+   isis enable Underlay
+   isis network point-to-point
+!
+interface Ethernet5
+   description POD1-Spine-2 | Eth5
+   mtu 9000
+   no switchport
+   ip address 10.4.2.9/31
+   isis enable Underlay
+   no isis bfd
+   isis network point-to-point
+!
+interface Ethernet6
+   description POD2-R2 | Eth1
+   no switchport
+   vrf vrf-vxlan
+   ip address 10.20.2.10/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   description Underlay
+   ip address 10.16.2.0/32
+   isis enable Underlay
+   isis passive
+!
+interface Loopback2
+   description Overlay
+   ip address 10.18.2.0/32
+   isis enable Underlay
+   isis passive
+!
+interface Management1
+!
+interface Vxlan1
+   vxlan source-interface Loopback2
+   vxlan udp-port 4789
+   vxlan vrf vrf-vxlan vni 50000
+   vxlan learn-restrict any
+!
+ip routing
+ip routing vrf vrf-vxlan
+!
+router bgp 65501
+   neighbor EVPN-OVERLAY peer group
+   neighbor EVPN-OVERLAY remote-as 65501
+   neighbor EVPN-OVERLAY update-source Loopback2
+   neighbor EVPN-OVERLAY description Leaf's
+   neighbor EVPN-OVERLAY route-reflector-client
+   neighbor EVPN-OVERLAY send-community extended
+   neighbor 10.2.2.0 remote-as 65500
+   neighbor 10.2.2.0 next-hop-unchanged
+   neighbor 10.2.2.0 update-source Loopback2
+   neighbor 10.2.2.0 description to_POD1-Spine-2
+   neighbor 10.2.2.0 ebgp-multihop 3
+   neighbor 10.2.2.0 password 7 Dd8yPGC/QZ61329c1BqkQg==
+   neighbor 10.2.2.0 send-community extended
+   neighbor 10.18.0.1 peer group EVPN-OVERLAY
+   neighbor 10.18.0.2 peer group EVPN-OVERLAY
+   neighbor 10.18.0.3 peer group EVPN-OVERLAY
+   neighbor 10.18.0.4 peer group EVPN-OVERLAY
+   !
+   address-family evpn
+      neighbor EVPN-OVERLAY activate
+      neighbor 10.2.2.0 activate
+   !
+   address-family ipv4
+      neighbor 10.20.2.11 activate
+   !
+   vrf vrf-vxlan
+      rd 10.18.2.0:1
+      route-target import evpn 1:50000
+      route-target export evpn 1:50000
+      neighbor 10.20.2.11 remote-as 31133
+      neighbor 10.20.2.11 description to_POD2-R2
+      redistribute connected
+!
+router isis Underlay
+   net 49.0052.0100.0000.2200.00
+   is-type level-1
+   !
+   address-family ipv4 unicast
+!
+end
+```
+</details>
+
 ### Диагностика оборудования:
 
 <details>
