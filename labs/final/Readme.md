@@ -4677,3 +4677,74 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 </details>
 
 ### Проверка IP связности:
+
+<details>
+<summary> POD1-VPC1 проверка маршрутизации через L3 VNI </summary>
+ 
+ ```
+P1VPC1> ping 192.168.11.11
+
+192.168.11.11 icmp_seq=1 timeout
+192.168.11.11 icmp_seq=2 timeout
+192.168.11.11 icmp_seq=3 timeout
+192.168.11.11 icmp_seq=4 timeout
+84 bytes from 192.168.11.11 icmp_seq=5 ttl=62 time=488.580 ms
+
+P1VPC1> ping 192.168.11.11
+
+84 bytes from 192.168.11.11 icmp_seq=1 ttl=62 time=73.887 ms
+84 bytes from 192.168.11.11 icmp_seq=2 ttl=62 time=80.764 ms
+84 bytes from 192.168.11.11 icmp_seq=3 ttl=62 time=293.953 ms
+84 bytes from 192.168.11.11 icmp_seq=4 ttl=62 time=242.108 ms
+84 bytes from 192.168.11.11 icmp_seq=5 ttl=62 time=256.251 ms
+
+P1VPC1> ping 192.168.100.11
+
+84 bytes from 192.168.100.11 icmp_seq=1 ttl=62 time=174.175 ms
+84 bytes from 192.168.100.11 icmp_seq=2 ttl=62 time=91.001 ms
+84 bytes from 192.168.100.11 icmp_seq=3 ttl=62 time=85.360 ms
+84 bytes from 192.168.100.11 icmp_seq=4 ttl=62 time=135.871 ms
+84 bytes from 192.168.100.11 icmp_seq=5 ttl=62 time=179.410 ms
+
+P1VPC1> ping 192.168.111.11
+
+84 bytes from 192.168.111.11 icmp_seq=1 ttl=62 time=224.497 ms
+84 bytes from 192.168.111.11 icmp_seq=2 ttl=62 time=94.741 ms
+84 bytes from 192.168.111.11 icmp_seq=3 ttl=62 time=311.494 ms
+84 bytes from 192.168.111.11 icmp_seq=4 ttl=62 time=165.212 ms
+84 bytes from 192.168.111.11 icmp_seq=5 ttl=62 time=258.178 ms
+
+P1VPC1> ping 1.1.1.1
+
+84 bytes from 1.1.1.1 icmp_seq=1 ttl=62 time=63.978 ms
+84 bytes from 1.1.1.1 icmp_seq=2 ttl=62 time=139.311 ms
+84 bytes from 1.1.1.1 icmp_seq=3 ttl=62 time=133.827 ms
+84 bytes from 1.1.1.1 icmp_seq=4 ttl=62 time=63.189 ms
+84 bytes from 1.1.1.1 icmp_seq=5 ttl=62 time=35.544 ms
+
+P1VPC1> ping 1.1.1.2
+
+84 bytes from 1.1.1.2 icmp_seq=1 ttl=62 time=547.713 ms
+84 bytes from 1.1.1.2 icmp_seq=2 ttl=62 time=63.377 ms
+84 bytes from 1.1.1.2 icmp_seq=3 ttl=62 time=43.682 ms
+84 bytes from 1.1.1.2 icmp_seq=4 ttl=62 time=77.263 ms
+84 bytes from 1.1.1.2 icmp_seq=5 ttl=62 time=56.473 ms
+
+P1VPC1> ping 2.2.2.1
+
+84 bytes from 2.2.2.1 icmp_seq=1 ttl=62 time=46.122 ms
+84 bytes from 2.2.2.1 icmp_seq=2 ttl=62 time=47.368 ms
+84 bytes from 2.2.2.1 icmp_seq=3 ttl=62 time=144.294 ms
+84 bytes from 2.2.2.1 icmp_seq=4 ttl=62 time=360.589 ms
+84 bytes from 2.2.2.1 icmp_seq=5 ttl=62 time=69.982 ms
+
+P1VPC1> ping 2.2.2.2
+
+84 bytes from 2.2.2.2 icmp_seq=1 ttl=62 time=133.685 ms
+84 bytes from 2.2.2.2 icmp_seq=2 ttl=62 time=171.372 ms
+84 bytes from 2.2.2.2 icmp_seq=3 ttl=62 time=40.662 ms
+84 bytes from 2.2.2.2 icmp_seq=4 ttl=62 time=57.165 ms
+84 bytes from 2.2.2.2 icmp_seq=5 ttl=62 time=101.191 ms
+
+```
+</details>
