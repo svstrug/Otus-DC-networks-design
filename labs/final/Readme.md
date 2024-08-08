@@ -2416,3 +2416,54 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
 ```
 </details>
+<details>
+<summary> POD2-R2 diag </summary>
+ 
+ ```
+POD2-R2#show bgp summary
+BGP summary information for VRF default
+Router identifier 2.2.2.2, local AS number 31133
+Neighbor            AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+---------- ----------- ------------- ----------------------- -------------- ---------- ----------
+10.20.2.10       65501 Established   IPv4 Unicast            Negotiated             13         11
+
+POD2-R2#show bgp neighbors 10.20.2.10 received-routes
+BGP routing table information for VRF default
+Router identifier 2.2.2.2, local AS number 31133
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+          10.4.2.10/31           10.20.2.10            -       -          -       -       65501 65500 i
+          10.20.2.10/31          10.20.2.10            -       -          -       -       65501 i
+ * >      192.168.10.0/24        10.20.2.10            -       -          -       -       65501 65500 i
+ * >      192.168.10.2/32        10.20.2.10            -       -          -       -       65501 65500 i
+ * >      192.168.10.3/32        10.20.2.10            -       -          -       -       65501 65500 i
+ * >      192.168.10.11/32       10.20.2.10            -       -          -       -       65501 65500 i
+ * >      192.168.11.0/24        10.20.2.10            -       -          -       -       65501 65500 i
+ * >      192.168.11.11/32       10.20.2.10            -       -          -       -       65501 65500 i
+ * >      192.168.100.0/24       10.20.2.10            -       -          -       -       65501 i
+ * >      192.168.100.2/32       10.20.2.10            -       -          -       -       65501 i
+ * >      192.168.100.3/32       10.20.2.10            -       -          -       -       65501 i
+ * >      192.168.100.11/32      10.20.2.10            -       -          -       -       65501 i
+ * >      192.168.111.0/24       10.20.2.10            -       -          -       -       65501 i
+
+POD2-R2#show bgp neighbors 10.20.2.10 advertised-routes
+BGP routing table information for VRF default
+Router identifier 2.2.2.2, local AS number 31133
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast, q - Queued for advertisement
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      2.2.2.2/32             10.20.2.11            -       -          -       -       31133 i
+
+```
+</details>
