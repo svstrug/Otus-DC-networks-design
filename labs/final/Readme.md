@@ -1569,7 +1569,7 @@ MTU         : 1500
 
 <details>
 <summary> POD1-R1 diag </summary>
-
+ ```
 POD1-R1#show bgp summary
 BGP summary information for VRF default
 Router identifier 1.1.1.1, local AS number 31133
@@ -1614,5 +1614,5 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
  * >      1.1.1.1/32             10.4.1.11             -       -          -       -       31133 i
-
+```
 </details>
