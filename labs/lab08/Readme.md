@@ -1372,3 +1372,80 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
  * >      192.168.50.0/23        10.4.3.2              -       -          -       -       65100 65004 i
 ```
 </details>
+
+#### Проверка наличия IP связности у клиентов:
+
+<details>
+<summary> VPC1-B diag </summary>
+ 
+ ```
+VPC1-B> show ip
+
+NAME        : VPC1-B[1]
+IP/MASK     : 192.168.30.1/24
+GATEWAY     : 192.168.30.254
+DNS         :
+MAC         : 00:50:79:66:68:08
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+VPC2-R> show ip
+
+NAME        : VPC2-R[1]
+IP/MASK     : 192.168.50.1/24
+GATEWAY     : 192.168.50.254
+DNS         :
+MAC         : 00:50:79:66:68:09
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+VPC3-B> show ip
+
+NAME        : VPC3-B[1]
+IP/MASK     : 192.168.31.1/24
+GATEWAY     : 192.168.31.254
+DNS         :
+MAC         : 00:50:79:66:68:0a
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+VPC4-R> show ip
+
+NAME        : VPC4-R[1]
+IP/MASK     : 192.168.51.1/24
+GATEWAY     : 192.168.51.254
+DNS         :
+MAC         : 00:50:79:66:68:0b
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+
+VPC1-B> ping 192.168.31.1
+
+84 bytes from 192.168.31.1 icmp_seq=1 ttl=62 time=47.110 ms
+84 bytes from 192.168.31.1 icmp_seq=2 ttl=62 time=14.676 ms
+84 bytes from 192.168.31.1 icmp_seq=3 ttl=62 time=14.147 ms
+84 bytes from 192.168.31.1 icmp_seq=4 ttl=62 time=12.412 ms
+84 bytes from 192.168.31.1 icmp_seq=5 ttl=62 time=13.306 ms
+
+VPC1-B> ping 192.168.50.1
+
+84 bytes from 192.168.50.1 icmp_seq=1 ttl=59 time=115.110 ms
+84 bytes from 192.168.50.1 icmp_seq=2 ttl=59 time=41.149 ms
+84 bytes from 192.168.50.1 icmp_seq=3 ttl=59 time=44.728 ms
+84 bytes from 192.168.50.1 icmp_seq=4 ttl=59 time=38.441 ms
+84 bytes from 192.168.50.1 icmp_seq=5 ttl=59 time=35.675 ms
+
+VPC1-B> ping 192.168.51.1
+
+84 bytes from 192.168.51.1 icmp_seq=1 ttl=60 time=190.802 ms
+84 bytes from 192.168.51.1 icmp_seq=2 ttl=60 time=28.535 ms
+84 bytes from 192.168.51.1 icmp_seq=3 ttl=60 time=25.488 ms
+84 bytes from 192.168.51.1 icmp_seq=4 ttl=60 time=28.099 ms
+84 bytes from 192.168.51.1 icmp_seq=5 ttl=60 time=24.297 ms
+```
+</details>
