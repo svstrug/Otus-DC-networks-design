@@ -1325,6 +1325,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
  * >      10.4.3.0/31            10.4.3.1              -       -          -       -       65004 i
  *s>      192.168.50.0/24        10.4.3.1              -       -          -       -       65004 65000 65002 i
  *s>      192.168.51.0/24        10.4.3.1              -       -          -       -       65004 i
+
 Router-1#show bgp neighbors 10.4.3.1 advertised-routes 
 BGP routing table information for VRF default
 Router identifier 10.2.0.254, local AS number 65100
@@ -1339,6 +1340,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
  * >      10.4.3.2/31            10.4.3.0              -       -          -       -       65100 65004 i
  * >      192.168.30.0/23        10.4.3.0              -       -          -       -       65100 65004 65000 i
  * >      192.168.50.0/23        10.4.3.0              -       -          -       -       65100 65004 i
+
 Router-1#show bgp neighbors 10.4.3.3 received-routes
 BGP routing table information for VRF default
 Router identifier 10.2.0.254, local AS number 65100
@@ -1353,6 +1355,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
  * >      10.4.3.2/31            10.4.3.3              -       -          -       -       65004 i
  *s>      192.168.30.0/24        10.4.3.3              -       -          -       -       65004 65000 65001 i
  *s>      192.168.31.0/24        10.4.3.3              -       -          -       -       65004 65000 65003 i
+
 Router-1#show bgp neighbors 10.4.3.3 advertised-routes
 BGP routing table information for VRF default
 Router identifier 10.2.0.254, local AS number 65100
